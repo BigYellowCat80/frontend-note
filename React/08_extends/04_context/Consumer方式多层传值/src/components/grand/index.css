@@ -1,0 +1,15 @@
+.grand{
+  background-color: #f55;
+  width: 600px;
+  padding: 20px;
+}
+
+.father{
+  background-color: #5f5; 
+  padding: 20px;
+}
+
+.child{
+  background-color: #55f;
+  padding: 20px;
+}

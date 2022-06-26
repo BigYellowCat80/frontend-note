@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_函数式组件</title>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      function Demo() {
+        console.log("this", this) // undefined 因为Babel开启了严格模式
+        return <h3>我是函数式组件</h3>
+      }
+
+      ReactDOM.render(<Demo />, document.getElementById("test"))
+
+      // 在Babel中文网直接解析成：
+      // "use strict";
+      // function Demo() {
+      //   console.log("this", this); // undefined 因为Babel开启了严格模式
+      //   return /*#__PURE__*/React.createElement("h3", null, "\u6211\u662F\u51FD\u6570\u5F0F\u7EC4\u4EF6");
+      // }
+
+      // 执行了ReactDOM.render后，发生了什么
+      // 1. React解析组件标签，找到了Demo组件
+      // 2. 发现组件是使用函数定义的，随后调用该函数，将返回的虚拟DOM转为真实DOM，呈现在页面中
+    </script>
+  </body>
+</html>

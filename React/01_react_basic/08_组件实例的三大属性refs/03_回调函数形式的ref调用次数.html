@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03_回调函数形式的ref调用次数</title>
+    <style>
+      .item {
+        margin-bottom: 8px;
+        background-color: #eee;
+        height: 40px;
+        display: flex;
+        width: 256px;
+      }
+
+      .item button {
+        margin-left: 8px;
+      }
+
+      .item input {
+        padding-left: 8px;
+      }
+
+      .weather {
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      class Typebox extends React.Component {
+        state = { isHot: true }
+
+        showDate1 = () => {
+          alert(this.input1.value)
+        }
+
+        changeWeather = () => {
+          let { isHot } = this.state
+          isHot = !isHot
+          this.setState({ isHot })
+        }
+
+        saveInput = (dom) => {
+          console.log("callback2", dom)
+          this.input1 = dom
+        }
+
+        render() {
+          const { isHot } = this.state
+          return (
+            <div className="typebox">
+              <div className="item">
+                <input
+                  type="text"
+                  placeholder="内联"
+                  ref={(dom) => {
+                    console.log("callback1", dom)
+                    this.input1 = dom
+                  }}
+                />
+                <button onClick={this.showDate1}>button</button>
+              </div>
+
+              <div className="item">
+                <input
+                  type="text"
+                  placeholder="class的绑定函数方式"
+                  ref={this.saveInput}
+                />
+                <button onClick={this.showDate1}>button</button>
+              </div>
+
+              <div className="item weather">
+                <span>Today is {isHot ? "HOT" : "COLD"}</span>
+                <button onClick={this.changeWeather}>update</button>
+              </div>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Typebox />, document.getElementById("test"))
+
+      // 回调函数形式的ref，上来就调用了一遍
+      // 页面更新过程中，调用两次。第一次传入的dom是null，第二次才是dom节点。因为每次渲染时会创建一个新的函数实例，所以React清空旧的ref并且设置新的
+      // 通过将ref的回调函数定义成class的绑定函数方式可以避免以上问题，但是大多情况下它是无关紧要的（上来调用一次，页面更新不再调用，因为已经放在实例上了）
+      // 内联的使用较多
+    </script>
+  </body>
+</html>

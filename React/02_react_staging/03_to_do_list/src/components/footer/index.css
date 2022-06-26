@@ -1,0 +1,34 @@
+.footer {
+  height: 40px;
+  background-color: #5f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer .left {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.footer .left label {
+  cursor: pointer;
+}
+
+.footer .left .name {
+  margin-left: 6px;
+}
+
+.footer .right {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer .right .delete-btn {
+  height: 80%;
+  cursor: pointer;
+}

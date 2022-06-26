@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04_小练习计数器</title>
+    <style>
+      .count {
+        height: 50px;
+        width: 150px;
+        display: flex;
+        border: 1px solid #ccc;
+        margin-bottom: 8px;
+      }
+
+      .count > div {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .number {
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+      }
+
+      .calc {
+        cursor: pointer;
+      }
+
+      .calc:hover {
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Count extends React.Component {
+        state = { count: 0 }
+
+        calc = (num) => {
+          console.log(num)
+          console.log("this", this) // Count {props: {…}, context: {…}, refs: {…}, updater: {…}, state: {…}, …}calc: ƒ (num)context: {}props: {}refs: {}state: {count: 0}updater: {isMounted: ƒ, enqueueSetState: ƒ, enqueueReplaceState: ƒ, enqueueForceUpdate: ƒ}_reactInternalFiber: FiberNode {tag: 2, key: null, stateNode: Count, return: FiberNode, type: ƒ, …}_reactInternalInstance: {_processChildContext: ƒ}isMounted: (...)replaceState: (...)[[Prototype]]: Component
+
+          let { count } = this.state
+          count += num
+
+          // console.log(count)
+          this.setState({ count })
+        }
+
+        render() {
+          const { count } = this.state
+          return (
+            <div className="count">
+              <div className="calc" onClick={this.calc.bind(this, -1)}>
+                -
+              </div>
+              <div className="number">{count}</div>
+              <div className="calc" onClick={this.calc.bind(this, 1)}>
+                +
+              </div>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(
+        <div>
+          <Count />
+          <Count />
+        </div>,
+        document.getElementById("test")
+      )
+    </script>
+  </body>
+</html>

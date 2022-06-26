@@ -1,0 +1,42 @@
+.list-item {
+  margin-bottom: 8px;
+  display: flex;
+  background-color: #f44;
+}
+
+.list-item .left {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.list-item .left label {
+  cursor: pointer;
+}
+
+.list-item .left .name {
+  margin-left: 6px;
+  color: #fff;
+}
+
+.list-item .right {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.list-item .right button {
+  height: 80%;
+  box-sizing: border-box;
+  display: none;
+  cursor: pointer;
+}
+
+.list-item:hover {
+  background-color: #f88;
+}
+
+.list-item:hover .right button {
+  display: block;
+}

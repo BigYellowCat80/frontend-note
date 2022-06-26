@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04_props的简写方式</title>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      const person = {
+        name: "Selena",
+        age: 28,
+        gender: "female"
+      }
+
+      class Person extends React.Component {
+        static propTypes = {
+          name: PropTypes.string.isRequired,
+          age: PropTypes.number,
+          gender: PropTypes.string,
+          run: PropTypes.func
+        }
+
+        static defaultProps = {
+          age: 18,
+          gender: "male"
+        }
+
+        render() {
+          const { name, age, gender } = this.props
+
+          return (
+            <ul>
+              <li>Name: {name}</li>
+              <li>Age: {age}</li>
+              <li>Gender: {gender}</li>
+            </ul>
+          )
+        }
+      }
+
+      ReactDOM.render(
+        <div>
+          <Person name="Tom" />
+          <Person name="Jerry" age={8} gender="female" />
+          <Person {...person} />
+        </div>,
+        document.getElementById("test")
+      )
+
+      // props的type required default
+
+      // propTypes = { PropTypes.string.isRequired }
+      // defaultProps
+    </script>
+  </body>
+</html>

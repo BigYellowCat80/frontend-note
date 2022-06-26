@@ -1,0 +1,12 @@
+.item{
+  margin-top: 8px;
+}
+
+.btns > button{
+  margin-right: 8px;
+}
+
+.result{
+  height: 40px;
+  font-weight: bold;
+}

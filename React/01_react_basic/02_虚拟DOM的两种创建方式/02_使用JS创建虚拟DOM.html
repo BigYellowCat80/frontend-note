@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02_使用JS创建虚拟DOM</title>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <!-- 没有用JSX，所以不用引入Babel -->
+    <!-- <script src="../js/babel.min.js"></script> -->
+
+    <script>
+      // 1. 创建虚拟DOM
+      // 2. 渲染虚拟DOM到页面
+
+      // // const VDOM = React.createElement(标签名, 标签属性, 标签内容)
+      // // document.createElement创建真实DOM，React.createElement创建虚拟DOM
+      // const VDOM = React.createElement("h3", { id: "title" }, "Hello React")
+      // // ReactDOM.render(虚拟DOM, 容器)
+      // ReactDOM.render(VDOM, document.getElementById("test"))
+
+      // 如果h3标签里还有个span标签，就麻烦起来了。层级一多多复杂起来了
+
+      const VDOM = React.createElement(
+        "h3",
+        { id: "title" },
+        React.createElement("span", {}, "Hello React")
+      )
+      ReactDOM.render(VDOM, document.getElementById("test"))
+    </script>
+  </body>
+</html>

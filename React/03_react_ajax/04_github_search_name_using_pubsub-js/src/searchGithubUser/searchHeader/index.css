@@ -1,0 +1,25 @@
+.search-header {
+  background-color: #eee;
+  padding: 20px;
+}
+
+.search-header h3 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.input-box {
+  height: 40px;
+  display: flex;
+}
+
+.input-box input {
+  margin-right: 4px;
+  padding-left: 4px;
+  flex-grow: 1;
+  outline: none;
+}
+
+.input-box button {
+  flex: 0 0 auto;
+}

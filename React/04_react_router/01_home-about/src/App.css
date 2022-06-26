@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+}
+
+.nav {
+  background-color: #eee;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100px;
+  width: 100px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-right: 8px;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.content {
+  height: 100px;
+  width: 200px;
+}
+
+.active {
+  background-color: #5f5;
+  color: #000;
+}

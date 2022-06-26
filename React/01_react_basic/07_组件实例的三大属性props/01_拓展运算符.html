@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_拓展运算符</title>
+  </head>
+  <body>
+    <script>
+      // 1. 连接数组
+      const odd = [1, 3, 5, 7, 9]
+      const evan = [2, 4, 6, 8, 10]
+      console.log([...odd, ...evan]) // (10) [1, 3, 5, 7, 9, 2, 4, 6, 8, 10]
+
+      // 2. 浅拷贝对象
+      const person = {
+        name: "Tom",
+        age: 18,
+        gender: "male"
+      }
+
+      // 浅拷贝对象并增加属性
+      console.log({ ...person, height: 172 }) // {name: 'Tom', age: 18, gender: 'male', height: 172}
+
+      //  前拷贝对象并覆盖属性
+      console.log({ ...person, name: "Jerry" }) // {name: 'Jerry', age: 18, gender: 'male'}
+    </script>
+  </body>
+</html>

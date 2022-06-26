@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05_不使用ref获取到文本框的值</title>
+    <style>
+      .item {
+        margin-bottom: 8px;
+        /* background-color: #eee; */
+        height: 40px;
+        display: flex;
+        width: 256px;
+      }
+
+      .item button {
+        margin-left: 8px;
+      }
+
+      .item input {
+        padding-left: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      class Typebox extends React.Component {
+        showDate = (e) => {
+          console.log(e.target.value)
+        }
+
+        render() {
+          return (
+            <div className="typebox">
+              <div className="item">
+                <input type="text" placeholder="blur" onBlur={this.showDate} />
+              </div>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Typebox />, document.getElementById("test"))
+
+      // 如果绑定事件和元素和操作的元素是同一个，可以省略ref。使用e.target
+    </script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04_表单提交优化不使用函数柯里化</title>
+    <style>
+      .form {
+        width: 400px;
+        height: 300px;
+        background-color: #eee;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+      }
+
+      .item {
+        width: 200px;
+        height: 40px;
+        background-color: red;
+        margin-bottom: 20px;
+      }
+
+      .item input {
+        width: 100%;
+        height: 100%;
+        padding-left: 8px;
+        box-sizing: border-box;
+      }
+
+      .item button {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      class Login extends React.Component {
+        state = { username: "", password: "" }
+
+        saveFormData = (dataType, event) => {
+          this.setState({ [dataType]: event.target.value })
+        }
+
+        handleSubmit = () => {
+          const { username, password } = this.state
+          console.log({ username, password })
+        }
+
+        render() {
+          return (
+            <div className="form">
+              <div className="item">
+                <input
+                  type="text"
+                  placeholder="username"
+                  onChange={(event) => {
+                    this.saveFormData("username", event)
+                  }}
+                />
+              </div>
+              <div className="item">
+                <input
+                  type="password"
+                  placeholder="password"
+                  onChange={(event) => {
+                    this.saveFormData("password", event)
+                  }}
+                />
+              </div>
+              <div className="item">
+                <button onClick={this.handleSubmit}>submit</button>
+              </div>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Login />, document.getElementById("test"))
+
+      // 开发中是否使用都比较常见
+    </script>
+  </body>
+</html>

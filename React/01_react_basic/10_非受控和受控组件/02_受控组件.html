@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02_受控组件</title>
+    <style>
+      .form {
+        width: 400px;
+        height: 300px;
+        background-color: #eee;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+      }
+
+      .item {
+        width: 200px;
+        height: 40px;
+        background-color: red;
+        margin-bottom: 20px;
+      }
+
+      .item input {
+        width: 100%;
+        height: 100%;
+        padding-left: 8px;
+        box-sizing: border-box;
+      }
+
+      .item button {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      class Login extends React.Component {
+        state = { username: "", password: "" }
+
+        saveUsername = (e) => {
+          // console.log(e.target.value)
+          const username = e.target.value
+          this.setState({ username })
+        }
+
+        savePassword = (e) => {
+          const password = e.target.value
+          this.setState({ password })
+        }
+
+        handleSubmit = () => {
+          // console.log(this.state)
+          const { username, password } = this.state
+          console.log({ username, password })
+        }
+
+        render() {
+          return (
+            <div className="form">
+              <div className="item">
+                <input
+                  type="text"
+                  placeholder="username"
+                  onChange={this.saveUsername}
+                />
+              </div>
+              <div className="item">
+                <input
+                  type="password"
+                  placeholder="password"
+                  onChange={this.savePassword}
+                />
+              </div>
+              <div className="item">
+                <button onClick={this.handleSubmit}>submit</button>
+              </div>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Login />, document.getElementById("test"))
+
+      // 受控组件：随着输入实时存在state中，需要的时候从state中取
+      // 那到底用非受控组件还是受控组件呢？建议使用受控组件，因为一个ref都没有用到
+    </script>
+  </body>
+</html>

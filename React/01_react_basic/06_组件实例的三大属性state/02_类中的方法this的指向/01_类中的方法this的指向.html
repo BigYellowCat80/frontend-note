@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_类中的方法this的指向</title>
+    <style>
+      img {
+        display: block;
+        border: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <img src="./images/this.png" alt="" />
+    </div>
+
+    <script>
+      class Student {
+        constructor(name, age) {
+          this.name = name
+          this.age = age
+        }
+
+        speak() {
+          console.log("this", this)
+        }
+      }
+
+      const p1 = new Student("Tom", 18)
+      p1.speak() // Student {name: 'Tom', age: 18} 因为是通过实例调用的，实例找到了原型上的speak方法
+
+      const x = p1.speak
+      x() // undefined // 这相当于重新创建了一个变量指向speak函数，然后进行函数调用。本因为window，但是，类中的方法默认在方法类开启了严格模式
+    </script>
+  </body>
+</html>

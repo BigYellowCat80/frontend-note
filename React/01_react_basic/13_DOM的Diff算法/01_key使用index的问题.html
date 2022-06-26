@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_key使用index的问题</title>
+    <style>
+      li {
+        height: 30px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      li > input {
+        margin-left: 8px;
+      }
+
+      .active {
+        background-color: #f55;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/17.0.1/react.development.js"></script>
+    <script src="../js/17.0.1/react-dom.development.js"></script>
+    <script src="../js/17.0.1/babel.min.js"></script>
+
+    <script type="text/babel">
+      class List extends React.Component {
+        state = {
+          list: [
+            { id: 1, name: "Tom" },
+            { id: 2, name: "Ann" }
+          ]
+        }
+
+        add = () => {
+          const { list } = this.state
+          const person = { id: 3, name: "Ken" }
+          this.setState({ list: [person, ...list] })
+        }
+
+        render() {
+          const { list } = this.state
+          return (
+            <div>
+              <button onClick={this.add}>add</button>
+              <ul>
+                {list.map((el, index) => {
+                  return (
+                    <li key={index}>
+                      {el.name} <input type="text" />
+                    </li>
+                  )
+                })}
+              </ul>
+
+              <hr />
+
+              <ul>
+                {list.map((el) => {
+                  return (
+                    <li key={el.id}>
+                      {el.name} <input type="text" />
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<List />, document.getElementById("test"))
+    </script>
+  </body>
+</html>

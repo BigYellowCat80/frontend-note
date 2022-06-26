@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05_组件生命周期（旧）_父组件render流程</title>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Parent extends React.Component {
+        state = { carName: "Mercedes Benz" }
+
+        changeCar = () => {
+          this.setState({ carName: "Ferrari" })
+        }
+
+        render() {
+          console.log("render from parent")
+          return (
+            <div>
+              <div>I'm the Car Component</div>
+              <button onClick={this.changeCar}>changeCar</button>
+              <Child carName={this.state.carName} />
+            </div>
+          )
+        }
+      }
+
+      class Child extends React.Component {
+        componentWillReceiveProps() {
+          console.log("componentWillReceiveProps")
+        }
+
+        shouldComponentUpdate() {
+          console.log("shouldComponentUpdate")
+          return true
+        }
+
+        componentWillUpdate() {
+          console.log("componentWillUpdate")
+        }
+
+        componentDidUpdate() {
+          console.log("componentDidUpdate")
+        }
+
+        render() {
+          console.log("render from child")
+          return <h3>{this.props.carName}</h3>
+        }
+      }
+
+      ReactDOM.render(<Parent />, document.getElementById("test"))
+
+      // render from parent
+      // componentWillReceiveProps
+      // shouldComponentUpdate
+      // componentWillUpdate
+      // render from child
+      // componentDidUpdate
+
+      // 需要注意的是：父组件上来第一次render不会触发子组件的componentWillReceiveProps。第二次开始才会
+    </script>
+  </body>
+</html>

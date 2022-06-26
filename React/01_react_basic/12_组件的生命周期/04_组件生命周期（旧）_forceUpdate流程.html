@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04_组件生命周期（旧）_forceUpdate流程</title>
+    <style>
+      .count {
+        height: 50px;
+        width: 150px;
+        display: flex;
+        border: 1px solid #ccc;
+        margin-bottom: 8px;
+      }
+
+      .count > div {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .number {
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+      }
+
+      .calc {
+        cursor: pointer;
+      }
+
+      .calc:hover {
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Count extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = { count: 0 }
+        }
+
+        calc = (num) => {
+          return () => {
+            let { count } = this.state
+            count += num
+            this.setState({ count })
+          }
+        }
+
+        force = () => {
+          this.forceUpdate()
+        }
+
+        componentWillUpdate() {
+          console.log("componentWillUpdate")
+        }
+
+        componentDidUpdate() {
+          console.log("componentDidUpdate")
+        }
+
+        render() {
+          console.log("render")
+          const { count } = this.state
+          return (
+            <div>
+              <div className="count">
+                <div className="calc" onClick={this.calc(-1)}>
+                  -
+                </div>
+                <div className="number">{count}</div>
+                <div className="calc" onClick={this.calc(1)}>
+                  +
+                </div>
+              </div>
+              <button onClick={this.force}>forceUpdate</button>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Count />, document.getElementById("test"))
+
+      // componentWillUpdate
+      // render
+      // componentDidUpdate
+    </script>
+  </body>
+</html>

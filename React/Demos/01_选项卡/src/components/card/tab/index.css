@@ -1,0 +1,23 @@
+.tabs {
+  background-color: #f55;
+  list-style: none;
+  width: 300px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40px;
+  color: #fff;
+}
+
+.tabs > li {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.tabs > li.active {
+  background-color: #55f;
+}

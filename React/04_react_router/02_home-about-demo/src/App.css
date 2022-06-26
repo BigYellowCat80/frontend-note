@@ -1,0 +1,18 @@
+.links {
+  height: 40px;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.links a {
+  color: #000;
+  margin-right: 8px;
+}
+
+.routes {
+  margin-top: 8px;
+  height: 100px;
+  border: 1px solid #000;
+}

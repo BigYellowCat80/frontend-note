@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>08_组件生命周期（新）_getSnapshotBeforeUpdate</title>
+    <style>
+      .count {
+        height: 50px;
+        width: 150px;
+        display: flex;
+        border: 1px solid #ccc;
+        margin-bottom: 8px;
+      }
+
+      .count > div {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .number {
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+      }
+
+      .calc {
+        cursor: pointer;
+      }
+
+      .calc:hover {
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/17.0.1/react.development.js"></script>
+    <script src="../js/17.0.1/react-dom.development.js"></script>
+    <script src="../js/17.0.1/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Count extends React.Component {
+        constructor(props) {
+          console.log("constructor")
+
+          super(props)
+          this.state = { count: 0 }
+        }
+
+        calc = (num) => {
+          return () => {
+            let { count } = this.state
+            count += num
+            this.setState({ count })
+          }
+        }
+
+        static getDerivedStateFromProps() {
+          console.log("getDerivedStateFromProps")
+          return null
+        }
+
+        componentDidMount() {
+          console.log("componentDidMount")
+        }
+
+        getSnapshotBeforeUpdate(prevProps, prevState) {
+          console.log("getSnapshotBeforeUpdate", prevProps, prevState)
+          return "hello react"
+        }
+
+        componentDidUpdate(prevProps, prevState, snapshotValue) {
+          console.log("componentDidUpdate", prevProps, prevState, snapshotValue)
+        }
+
+        render() {
+          console.log("render")
+          const { count } = this.state
+          return (
+            <div className="count">
+              <div className="calc" onClick={this.calc(-1)}>
+                -
+              </div>
+              <div className="number">{count}</div>
+              <div className="calc" onClick={this.calc(1)}>
+                +
+              </div>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Count count={200} />, document.getElementById("test"))
+
+      // 举个例子，getSnapshotBeforeUpdate有啥用
+      // 比如页面10个li标签，点击按钮新增一个li标签，但是在新增前要拿到这10个li标签的高度就可以用getSnapshotBeforeUpdate
+    </script>
+  </body>
+</html>

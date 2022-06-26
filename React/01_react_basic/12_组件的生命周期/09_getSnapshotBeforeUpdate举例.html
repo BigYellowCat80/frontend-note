@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>09_getSnapshotBeforeUpdate举例</title>
+    <style>
+      .list {
+        height: 150px;
+        border: 1px solid #ccc;
+        width: 800px;
+        padding-left: 0;
+        overflow-y: auto;
+      }
+
+      .list > li {
+        height: 30px;
+        line-height: 30px;
+        padding-left: 8px;
+        box-sizing: border-box;
+        border-bottom: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/17.0.1/react.development.js"></script>
+    <script src="../js/17.0.1/react-dom.development.js"></script>
+    <script src="../js/17.0.1/babel.min.js"></script>
+
+    <script type="text/babel">
+      //  需求：在固定高度的盒子里，一秒钟在上面新增一条数据，在新增数据前，获取到盒子的scrollHeight
+
+      class List extends React.Component {
+        state = {
+          list: []
+        }
+
+        componentDidMount() {
+          setInterval(() => {
+            const { list } = this.state
+            const date = new Date()
+            const content = String(new Date())
+            const id = new Date().getTime()
+
+            this.setState({
+              list: [{ content, id }, ...list]
+            })
+          }, 1000)
+        }
+
+        getSnapshotBeforeUpdate(prevProps, prevState) {
+          return this.refs.list.scrollHeight
+        }
+
+        componentDidUpdate(prevProps, prevState, scrollHeight) {
+          console.log(prevProps, prevState)
+          console.log(`Before update scrollHeight is: ${scrollHeight}`)
+          console.log(
+            `After update scrollHeight is: ${this.refs.list.scrollHeight}`
+          )
+        }
+
+        render() {
+          const { list } = this.state
+
+          return (
+            <ul className="list" ref="list">
+              {list.map((item) => {
+                return <li key={item.id}>{item.content}</li>
+              })}
+            </ul>
+          )
+        }
+      }
+
+      ReactDOM.render(<List />, document.getElementById("test"))
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03_state的简写方式</title>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Weather extends React.Component {
+        state = { isHot: true }
+
+        changeWeather = () => {
+          let { isHot } = this.state
+          isHot = !isHot
+          this.setState({ isHot })
+
+          console.log(
+            'Weather.prototype.hasOwnProperty("changeWeather")',
+            Weather.prototype.hasOwnProperty("changeWeather")
+          )
+
+          console.log(
+            'this.hasOwnProperty("changeWeather")',
+            this.hasOwnProperty("changeWeather")
+          )
+
+          console.log("this", this)
+        }
+
+        render() {
+          const { isHot } = this.state
+
+          return (
+            <h3 onClick={this.changeWeather} className={isHot ? "red" : "blue"}>
+              Today is {isHot ? "HOT" : "COLD"}
+            </h3>
+          )
+        }
+      }
+
+      ReactDOM.render(<Weather />, document.getElementById("test"))
+
+      // 类中可以写constructor，可以写方法，也可以直接写赋值语句
+      // 如果写a=1，相当于给每个实例加上a这个属性，值为1
+      // 方法如上那么写的话，就相当于给每个实例添加一个changeWeather属性，值为一个函数
+    </script>
+  </body>
+</html>

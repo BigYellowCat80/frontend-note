@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_引出生命周期</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: #f00;
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      // 需求：小盒子不透明度一直减少，到0时马上变为1
+
+      class Life extends React.Component {
+        state = { opacity: 1 }
+
+        unmount = () => {
+          ReactDOM.unmountComponentAtNode(document.getElementById("test"))
+        }
+
+        componentDidMount() {
+          this.timer = setInterval(() => {
+            let { opacity } = this.state
+            opacity -= 0.04
+            opacity <= 0 && (opacity = 1)
+
+            this.setState({ opacity })
+          }, 100)
+        }
+
+        componentWillUnmount() {
+          console.log("componentWillUnmount")
+          clearInterval(this.timer)
+        }
+
+        render() {
+          let { opacity } = this.state
+
+          return (
+            <div>
+              <div className="box" style={{ opacity }}></div>
+              <button onClick={this.unmount}>Unmount</button>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Life />, document.getElementById("test"))
+    </script>
+  </body>
+</html>

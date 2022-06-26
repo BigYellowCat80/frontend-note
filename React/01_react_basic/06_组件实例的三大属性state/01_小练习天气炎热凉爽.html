@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>01_小练习天气炎热凉爽</title>
+    <style>
+      .red {
+        background-color: #f00;
+      }
+
+      .blue {
+        background-color: #00f;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+      class Weather extends React.Component {
+        constructor(props) {
+          super(props)
+          this.state = { isHot: true }
+
+          this.changeWeather = this.changeWeather.bind(this)
+        }
+
+        // changeWeather是Weather.prototype上的方法，供实例使用
+        changeWeather() {
+          // console.log("this in changeWeather", this) // undefined
+          // 为什么一点击时，this为undefined？
+          // 1. 由于changeWeather是作为onClick的回调，相当于把函数赋值给了一个变量。调用时不是通过实例调用的，而是直接调用
+          // 2. 类中的方法默认开启了严格模式，所以changeWeather中的this为undefined
+
+          let { isHot } = this.state
+          isHot = !isHot
+          this.setState({ isHot }) // 状态必须通过setState进行更新，且更新是一种合并，不是替换
+
+          console.log(
+            'React.Component.prototype.hasOwnProperty("setState")',
+            React.Component.prototype.hasOwnProperty("setState")
+          )
+        }
+
+        render() {
+          // console.log("this", this)
+          const { isHot } = this.state
+
+          return (
+            <h3 onClick={this.changeWeather} className={isHot ? "red" : "blue"}>
+              Today is {isHot ? "HOT" : "COLD"}
+            </h3>
+          )
+        }
+      }
+
+      ReactDOM.render(<Weather />, document.getElementById("test"))
+
+      // constructor调用几次？ 1次
+      // render调用几次？ 1+n次，n为点击次数，即状态更新的次数
+      // changeWeather调用几次？ 点几次调用几次
+    </script>
+  </body>
+</html>

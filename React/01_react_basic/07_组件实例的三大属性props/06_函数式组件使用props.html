@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>06_函数式组件使用props</title>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      function Person(props) {
+        const { name, age, gender } = props
+
+        return (
+          <ul>
+            <li>Name: {name}</li>
+            <li>Age: {age}</li>
+            <li>Gender: {gender}</li>
+          </ul>
+        )
+      }
+
+      Person.propTypes = {
+        name: PropTypes.string.isRequired,
+        age: PropTypes.number,
+        gender: PropTypes.string,
+        run: PropTypes.func
+      }
+
+      Person.defaultProps = {
+        age: 18,
+        gender: "male"
+      }
+
+      ReactDOM.render(
+        <div>
+          <Person name="Tom" />
+        </div>,
+        document.getElementById("test")
+      )
+
+      // 函数式组件也只能使用props，因为函数有个特点，可以传参。函数式组件不能使用state和refs
+    </script>
+  </body>
+</html>

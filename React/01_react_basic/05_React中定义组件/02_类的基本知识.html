@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>02_类的基本知识</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        constructor(name, age) {
+          this.name = name
+          this.age = age
+        }
+        speak() {
+          console.log(`Hello my name is ${this.name}`)
+        }
+      }
+
+      class Student extends Person {
+        constructor(name, age, grade) {
+          super(name, age)
+          this.grade = grade
+        }
+      }
+
+      const Tom = new Student("Tom", 18, "Grade 2")
+      console.log("Tom", Tom)
+
+      console.log(Student.prototype instanceof Person) // true
+      Tom.speak() // Hello my name is Tom
+      // Tom实例上找不speak，就去Student.prototype上找，也没找到；再往上找，在Person.prototype上找到了
+
+      // console.log(Tom.hasOwnProperty("speak")) // false
+      // console.log(Student.prototype.hasOwnProperty("speak")) // false
+      // console.log(Person.prototype.hasOwnProperty("speak")) // true
+
+      // 总结：
+      // 1. 类中的构造器不是必须写的，要对实例进行一些初始化的操作，如添加指定属性时才写
+      // 2. 如果A类继承了B类，且A类中写了构造器，那么A类构造器中的super是必须要调用的
+      // 3. 类中所定义的方法，都是放在了类的原型对象上，供实例去使用
+    </script>
+  </body>
+</html>
