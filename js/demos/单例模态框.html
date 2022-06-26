@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单例模态框</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      /* background: rgba(100, 100, 100, .1); */
+    }
+  </style>
+</head>
+
+<body>
+  <button class="btn">button</button>
+  <button class="btn">button</button>
+  <button class="btn">button</button>
+
+  <script>
+    class Cat {
+      constructor(name) {
+        if (Cat.instance) { return Cat.instance }
+        Cat.instance = this;
+        this.name = name;
+        return Cat.instance
+      }
+    }
+    // console.log(new Cat('kimi') === new Cat('kimi')); // true
+
+    window.onload = function () {
+      [...document.querySelectorAll('.btn')]
+        .forEach(element => {
+          element.onclick = () => { new Modal() }
+        })
+    }
+    class Modal {
+      constructor() {
+        if (Modal.instance) { return Modal.instance } // 关键代码
+        Modal.instance = this;
+        this.element = document.createElement('div');
+        this.element.style.position = 'absolute';
+        this.element.style.top = '0';
+        this.element.style.right = '0';
+        this.element.style.bottom = '0';
+        this.element.style.left = '0';
+        this.element.style.zIndex = -1;
+        this.element.style.background = 'rgba(100, 100, 100, .3)';
+        document.body.appendChild(this.element)
+      }
+    }
+    // console.log(new Modal() === new Modal()); // true
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>贝塞尔曲线用于transition和animation</title>
+  <style>
+    .first {
+      width: 100px;
+      height: 100px;
+      background: #f44;
+      border-radius: 4px;
+      transition: all 1s cubic-bezier(.2, -0.71, .72, 1.71) 0s;
+    }
+
+    .first:hover {
+      width: 200px;
+      height: 200px;
+      background: #44f;
+    }
+
+    .second {
+      margin-top: 10px;
+      width: 100px;
+      height: 100px;
+      background: #4f4;
+      border-radius: 4px;
+    }
+
+    .second:hover {
+      animation: move 1s cubic-bezier(.2, -0.71, .72, 1.71) 0s forwards;
+    }
+
+    @keyframes move {
+      0% {}
+
+      100% {
+        width: 200px;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 参考https://cubic-bezier.com/ -->
+
+  <div class="first">transition</div>
+  <div class="second">animation</div>
+</body>
+
+</html>

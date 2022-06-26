@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>省市案例</title>
+</head>
+
+<body>
+  <select id="province"></select>
+  <select id="city"></select>
+
+  <script>
+    const data = [
+      {
+        province: '广东',
+        city: ['广州', '深圳', '珠海']
+      },
+      {
+        province: '北京',
+        city: ['西城 ', '东城', '通州']
+      },
+      {
+        province: '河北',
+        city: ['石家庄', '秦皇岛', '保定']
+      },
+      {
+        province: '天津',
+        city: ['青羊', '大港', '红桥']
+      }
+    ];
+
+    const province = document.getElementById('province');
+    const city = document.getElementById('city');
+    init_province();
+    init_city();
+
+    function init_province() {
+      for (let item of data) {
+        const option = document.createElement('option');
+        option.value = item.province;
+        option.innerHTML = item.province;
+        province.add(option)
+      }
+    }
+
+    province.onchange = function () {
+      init_city()
+    }
+
+    function init_city() {
+      const targetArray = data.find(item => item.province == province.value).city; // 用filter也行，但是在这里用find会方便一点
+      city.innerHTML = '';
+      for (let item of targetArray) {
+        const option = document.createElement('option');
+        option.value = item
+        option.innerHTML = item;
+        city.add(option)
+      }
+    }
+
+  </script>
+</body>
+
+</html>

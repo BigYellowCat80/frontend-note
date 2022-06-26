@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时钟</title>
+  <style>
+    div,
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+    }
+
+    .clock {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 2px solid #000;
+      margin: 40px auto;
+      position: relative;
+    }
+
+    .clock ul {
+      list-style: none;
+      position: relative;
+    }
+
+    .clock ul li {
+      width: 4px;
+      height: 10px;
+      background: #000;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform-origin: center 150px;
+    }
+
+    .clock ul li:nth-child(5n+1) {
+      width: 12px;
+      height: 20px;
+    }
+
+    .fixed {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      position: absolute;
+      border: 3px dashed black;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hour {
+      background: #44f;
+      width: 12px;
+      height: 90px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-origin: 50% 90%;
+      transform: translate(-50%, -90%);
+      border-radius: 0 0 12px 12px;
+
+    }
+
+    .min {
+      background: #4f4;
+      width: 6px;
+      height: 120px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-origin: 50% 90%;
+      transform: translate(-50%, -90%);
+      border-radius: 0 0 12px 12px;
+
+    }
+
+    .sec {
+      background: #f44;
+      width: 3px;
+      height: 140px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-origin: 50% 90%;
+      transform: translate(-50%, -90%);
+      border-radius: 0 0 12px 12px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="boxWrap">
+    <div class="box clock">
+      <ul>
+        <!-- <li></li> -->
+      </ul>
+
+      <div class="fixed">
+        <div class="hour"></div>
+        <div class="min"></div>
+        <div class="sec"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      (function () { // 画出时钟的刻度
+        var clock = document.querySelector(".clock");
+        var str = "";
+        for (var i = 0; i < 60; i++) {
+          str += "<li></li>";
+        }
+        clock.children[0].innerHTML = str;
+        var marks = clock.children[0].children;
+        // console.log(marks.length);
+        for (var j = 0; j < marks.length; j++) {
+          marks[j].style.transform = "translateX(-50%) rotate(" + (6 * j) + "deg)"
+        }
+      })();
+
+
+      var hour = document.querySelector(".hour");
+      var min = document.querySelector(".min");
+      var sec = document.querySelector(".sec");
+
+      run();
+      timer = setInterval(run, 1000);
+
+      function run() {
+        var time = new Date();
+        var h = time.getHours();
+        var m = time.getMinutes();
+        var s = time.getSeconds();
+        hour.style.transform = "translate(-50%, -90%) rotate(" + (30 * (h + m / 60)) + "deg)";
+        min.style.transform = "translate(-50%, -90%) rotate(" + (6 * m) + "deg)";
+        sec.style.transform = "translate(-50%, -90%) rotate(" + (6 * s) + "deg)";
+      }
+    };
+  </script>
+</body>
+
+</html>

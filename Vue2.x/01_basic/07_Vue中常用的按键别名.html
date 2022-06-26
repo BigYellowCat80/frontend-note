@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue中常用的按键别名</title>
+
+    <style>
+      .text {
+        height: 40px;
+        width: 200px;
+        padding-left: 8px;
+        outline: none;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input
+        type="text"
+        class="text"
+        @keydown.huiche="showText"
+        placeholder="huiche"
+        v-model="input"
+      />
+
+      <hr />
+
+      <input
+        type="text"
+        class="text"
+        @keyup.caps-lock="showText"
+        placeholder="caps-lock"
+      />
+
+      <hr />
+
+      <input
+        type="text"
+        class="text"
+        @keydown.ctrl.y="showText"
+        placeholder="ctrl.y"
+      />
+      <!-- 这个功能牛逼，按下ctrl+y时触发 -->
+      <hr />
+
+      <textarea
+        type="text"
+        class="text"
+        v-model="textarea"
+        @keydown.enter.prevent="send"
+        placeholder="\n"
+      ></textarea>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            input: "",
+            textarea: ""
+          }
+        },
+        methods: {
+          showText(e) {
+            console.log(this.input)
+            console.log(e.key)
+          },
+          send(e) {
+            if (e.ctrlKey) return (this.textarea += "\n")
+            console.log(this.textarea)
+            this.textarea = ""
+          }
+        }
+      })
+
+      // enter
+      // delete
+      // esc
+      // space
+      // tab （特殊，必须配合keydown使用，因为会失去焦点）
+      // up
+      // down
+      // left
+      // right
+
+      // 系统修饰键
+      // 配合keyup使用：按下修饰键的同事，再按下其他键，随后释放其他键，事件才触发
+      // 配合keydown使用：正常触发事件
+      // ctrl
+      // alt
+      // shift
+      // meta （就是win键）
+
+      // 还可以定义别名按键，但是几乎不会用到这个
+      Vue.config.keyCodes.huiche = 13
+    </script>
+  </body>
+</html>

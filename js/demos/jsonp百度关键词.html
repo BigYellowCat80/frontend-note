@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsonp百度关键词</title>
+</head>
+
+<body>
+  <input type="text" id="text">
+  <ul class="box"></ul>
+
+  <script>
+    // http://suggestion.baidu.com/su?wd=手机&cb=fn
+
+    function check_keywords(url, keyword) {
+      return new Promise((resolve, reject) => {
+        let json;
+        window.fn = function (data) { json = data }
+        const script = document.createElement('script');
+        script.src = `${url}?wd=${keyword}&cb=fn`;
+        document.body.appendChild(script);
+
+        script.onload = function () { resolve(json) }
+        script.onerror = function () { reject(json) }
+      })
+    }
+
+    document.getElementById('text')
+      .onkeyup = function () {
+        const box = document.querySelector('.box');
+        const keyword = this.value.trim();
+        if (!keyword) { box.innerHTML = ''; return }
+        check_keywords('http://suggestion.baidu.com/su', keyword)
+          .then(value => {
+            const result = value?.s;
+            if (!result) { return }
+            box.innerHTML = '';
+            result.forEach(el => {
+              const li = document.createElement('li');
+              li.innerHTML = el;
+              box.appendChild(li)
+            })
+          })
+          .catch(reason => {
+            console.log(reason);
+          })
+      }
+
+    // 加上防抖就完美了
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>window.open</title>
+</head>
+
+<body>
+
+  <script>
+    let flag = true;
+    document.onclick = function () {
+      if (flag) {
+        window.open('https://www.baidu.com', '', 'width=800,height=400,top=100,left=100') // top和left相对屏幕
+      }
+      flag = false;
+    }
+  </script>
+</body>
+
+</html>

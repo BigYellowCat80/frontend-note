@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font: 13px "microsoft yahei", "sans-serif";
+        }
+        
+        h1,
+        h3 {
+            text-align: center;
+        }
+        
+        canvas {
+            background: lawngreen;
+        }
+    </style>
+    <title>canvas 线型渐变 放射性渐变</title>
+</head>
+
+<body>
+    <h1>canvas 线型渐变 放射性渐变</h1>
+    <h3></h3>
+
+    <p>线型渐变 从(50,50)渐变到(50,150)</p>
+    <canvas id="c1" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+    <p>放射性渐变 从半径为50的位置开始渐变 渐变到半径为100的位置</p>
+    <canvas id="c2" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+
+
+    <script>
+        window.onload = function() {
+            // 线型渐变 从(50,50)渐变到(50,150)
+            var c1 = document.getElementById('c1');
+            var p1 = c1.getContext('2d');
+            // .createLinearGradient(startX,startY,endX,endY)
+            var linearStyle = p1.createLinearGradient(50, 50, 50, 150);
+            linearStyle.addColorStop(0, "red");
+            linearStyle.addColorStop(0.5, "blue");
+            linearStyle.addColorStop(1, "#0f0");
+
+            p1.fillStyle = linearStyle;
+
+            p1.rect(50, 50, 100, 100);
+            p1.fill();
+
+
+            // 放射型渐变 从半径为50的位置开始渐变 渐变到半径为100的位置
+            var c2 = document.getElementById('c2');
+            var p2 = c2.getContext('2d');
+            // .createRadialGradient(startX, startY, 开始半径, endX, endY, 结束半径);
+            var linearStyle = p2.createRadialGradient(100, 100, 50, 100, 100, 100);
+            linearStyle.addColorStop(0, "red");
+            linearStyle.addColorStop(0.5, "yellow");
+            linearStyle.addColorStop(1, "lawngreen");
+
+            p2.fillStyle = linearStyle;
+
+            p2.arc(100, 100, 100, 0, Math.PI * 2);
+            p2.fill();
+
+        };
+    </script>
+
+    <script>
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font: 13px "microsoft yahei", "sans-serif";
+        }
+        
+        h1,
+        h3 {
+            text-align: center;
+        }
+        
+        canvas {
+            background: lawngreen;
+        }
+    </style>
+    <title>canvas 绘制圆形 圆弧 扇形 圆环</title>
+</head>
+
+<body>
+    <h1>canvas 绘制圆形 圆弧 扇形 圆环</h1>
+    <h3>arc(originX,originY,半径,开始位置,结束位置,boolean)</h3>
+
+    <p>圆形 boolean默认false顺时针 true为逆时针</p>
+    <canvas id="c1" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+    <p>圆弧</p>
+    <canvas id="c2" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+    <p>扇形</p>
+    <canvas id="c3" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+    <p>圆环</p>
+    <canvas id="c4" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+    <script>
+        window.onload = function() {
+            var c1 = document.getElementById('c1');
+            var p1 = c1.getContext('2d');
+
+            p1.lineWidth = 2;
+            p1.strokeStyle = "red";
+            // 圆形 boolean默认false顺时针 true为逆时针
+            p1.beginPath();
+            p1.arc(100, 100, 50, 0, Math.PI * 1.5)
+            p1.stroke();
+
+
+            // 圆弧
+            var c2 = document.getElementById('c2');
+            var p2 = c2.getContext('2d');
+
+            p2.lineWidth = 2;
+            p2.fillStyle = "blue";
+
+            p2.beginPath();
+            p2.arc(100, 100, 50, 0, Math.PI * 1.5)
+            p2.fill();
+
+            // 另外一边补上
+            p2.fillStyle = "red";
+            p2.beginPath();
+            p2.arc(100, 100, 50, 0, Math.PI * 1.5, true)
+            p2.fill();
+
+
+            // 扇形
+            var c3 = document.getElementById('c3');
+            var p3 = c3.getContext('2d');
+
+            p3.lineWidth = 4;
+            p3.strokeStyle = "blue";
+            p3.fillStyle = "red";
+
+            p3.beginPath();
+            p3.moveTo(100, 100);
+            p3.arc(100, 100, 50, 0, Math.PI * 1.5, true)
+            p3.closePath();
+            p3.stroke();
+            p3.fill();
+
+
+            // 圆环
+            var c4 = document.getElementById('c4');
+            var p4 = c4.getContext('2d');
+
+            p4.fillStyle = "red";
+            p4.beginPath();
+            p4.arc(100, 100, 50, Math.PI * 0.5, Math.PI * 1.5);
+            p4.fill();
+
+            p4.beginPath();
+            p4.fillStyle = "lawngreen";
+            p4.arc(100, 100, 25, Math.PI * 0.5, Math.PI * 1.5);
+            p4.fill();
+
+
+        };
+    </script>
+
+    <script>
+    </script>
+</body>
+
+</html>

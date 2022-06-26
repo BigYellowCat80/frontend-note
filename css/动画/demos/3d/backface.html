@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>backface</title>
+  <style>
+    ol {
+      font-weight: bold;
+    }
+
+    body {
+      perspective: 2000px;
+    }
+
+    .profile {
+      width: 200px;
+      height: 200px;
+      text-align: center;
+      line-height: 200px;
+      color: #fff;
+      position: relative;
+      transition: 4s;
+      transform-style: preserve-3d;
+      margin: 100px 0 0 100px;
+    }
+
+    .profile>div {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+
+    .back {
+      transform: rotateY(-180deg);
+    }
+
+    .profile:hover {
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+
+<body>
+  <ol>
+    <li>backface-visibility 属性定义当元素背面向屏幕时是否可见</li>
+    <li>hover时.profile在旋转 因此给他加上transition和transform-style: preserve-3d;</li>
+    <li>旋转的.profile父元素加上perspective</li>
+  </ol>
+
+  <div class="profile">
+    <div style="background: #f44;" class="front">front</div>
+    <div style="background: #44f;" class="back">back</div>
+  </div>
+</body>
+
+</html>

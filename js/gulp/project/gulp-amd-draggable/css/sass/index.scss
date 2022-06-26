@@ -1,0 +1,14 @@
+.box{
+  width: 384px;
+  height: 216px;
+  border:2px solid orange;margin:20px auto 0;
+
+  >img{
+    width: 100%;
+  }
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button{
+  appearance: none;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>e.stopImmediatePropagation()</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 200px;
+      background: #f44;
+    }
+
+    #box p {
+      margin: 0;
+      width: 100px;
+      height: 100px;
+      background: #44f;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <p></p>
+  </div>
+
+  <script>
+    // e.stopImmediatePropagation() 在e.stopPropagation()的基础上 如果后面有相同的事件绑定 后面的全部被第一个绑定的事件覆盖
+
+    $(function () {
+      // 给父元素添加事件
+      $('#box').on('click', function () {
+        console.log('div clicked');
+      });
+
+      $('#box p').on('click', function (e) {
+        console.log('p clicked - first');
+        e.stopImmediatePropagation()
+      });
+
+      $('#box p').on('click', function () {
+        console.log('p clicked - second');
+      });
+
+      $('#box p').on('click', function () {
+        console.log('p clicked - third');
+      });
+    });
+  </script>
+</body>
+
+</html>

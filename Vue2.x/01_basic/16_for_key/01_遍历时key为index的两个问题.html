@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>遍历时key为index的两个问题</title>
+    <style>
+      .list {
+        margin: 0;
+        padding: 0;
+        margin-top: 8px;
+      }
+
+      .box {
+        height: 40px;
+        border: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        padding-left: 8px;
+      }
+
+      .box > input {
+        margin-left: 8px;
+      }
+
+      .active {
+        background-color: #55f;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="add">add</button>
+      <ul class="list">
+        <li
+          class="box"
+          v-for="(item,index) in items"
+          :key="index"
+          :class="{active:index===itemId}"
+        >
+          {{item.name}}
+
+          <input type="text" />
+        </li>
+      </ul>
+
+      <div>
+        <img src="./images/1.png" alt="" />
+        <img src="./images/2.png" alt="" />
+      </div>
+    </div>
+
+    <script src="../../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          items: [
+            { id: 0, name: "apple" },
+            { id: 1, name: "banana" },
+            { id: 2, name: "mango" }
+          ],
+          itemId: 0
+        },
+        methods: {
+          add() {
+            this.items.unshift({ id: "000", name: "watermelon" })
+          }
+        }
+      })
+
+      // https://www.bilibili.com/video/BV1Zy4y1K7SH?p=30&spm_id_from=pageDriver
+      /* 遍历时key为index的两个问题
+          1. 效率问题。key是虚拟DOM的唯一标识，根据diff算法，如果key是index值，举个例子，一个数组有三个数据，unshift一个进去，那么四个数据都的得重新渲染（因为每个虚拟DOM根据key找到原来的虚拟DOM，数据不一样，得重新渲染）
+          2. 渲染问题。一个数组有三个数据渲染成列表，index为0的项背景色高亮，unshift一个进去，那么新进来的那个元素背景色高亮，原本不高亮了
+       */
+
+      // 那为啥不写key也出问题了呢？
+      // 因为不写key的时候，Vue在遍历时默认把index作为key了
+    </script>
+  </body>
+</html>

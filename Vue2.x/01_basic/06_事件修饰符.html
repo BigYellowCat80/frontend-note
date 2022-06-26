@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件修饰符</title>
+    <style>
+      .list {
+        padding: 0;
+        margin: 0;
+        width: 200px;
+        height: 200px;
+        background-color: #55f;
+        overflow: auto;
+      }
+
+      .list > li {
+        width: 100px;
+        height: 100px;
+        background-color: #f55;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <ul class="list" @scroll="scroll" @wheel="wheel">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        methods: {
+          scroll() {
+            console.log("scroll")
+          },
+          wheel() {
+            for (let i = 0; i < 100000; i++) {
+              console.log(i)
+            }
+            console.log("wheel")
+
+            // 滚动滚轮后，要遍历完，滚动条才发生了滚动。因为滚动条滚动是默认行为
+            // 但不是所有事件都有这个默认行为，scroll事件就不影响
+            // 移动端用passive较多
+          }
+        }
+      })
+
+      /* scroll和wheel的区别
+          scroll是滚动条滚动了就执行
+          wheel是鼠标滚轮滚动才执行
+
+          直接拖动滚动条，或者上下键控制滚动条，只会触发scroll事件；
+          滚轮滚到底部了，还滚动滚轮，只触发wheel事件
+      */
+
+      // prevent
+      // stop
+      // self
+      // once
+      // capture 使用事件的捕获模式
+      // passive 事件的默认行为立即执行，无需等待事件回调执行完毕（因为一般是回调用才执行默认行为）
+    </script>
+  </body>
+</html>

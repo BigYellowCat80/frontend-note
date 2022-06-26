@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>css3轮播图</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrapper {
+      width: 750px;
+      height: 390px;
+      overflow: hidden;
+      margin: 20px;
+      position: relative;
+      border: 2px solid #4f4;
+    }
+
+    .list {
+      height: 100%;
+      width: 3750px;
+      position: absolute;
+      list-style: none;
+      animation: swiper 8s ease 0s infinite;
+    }
+
+    .list li {
+      float: left;
+    }
+
+    @keyframes swiper {
+      0% {
+        left: 0;
+      }
+
+      20% {
+        left: 0;
+      }
+
+      25% {
+        left: -750px;
+      }
+
+      45% {
+        left: -750px;
+      }
+
+      50% {
+        left: -1500px;
+      }
+
+      70% {
+        left: -1500px;
+      }
+
+      75% {
+        left: -2250px;
+      }
+
+      95% {
+        left: -2250px;
+      }
+
+      100% {
+        left: -3000px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <ul class="list">
+      <li><img src="./img/1.jpg" alt=""></li>
+      <li><img src="./img/2.jpg" alt=""></li>
+      <li><img src="./img/3.jpg" alt=""></li>
+      <li><img src="./img/4.jpg" alt=""></li>
+      <li><img src="./img/1.jpg" alt=""></li>
+    </ul>
+  </div>
+</body>
+
+</html>

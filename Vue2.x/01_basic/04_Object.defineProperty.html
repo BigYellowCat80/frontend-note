@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object.defineProperty</title>
+  </head>
+  <body>
+    <script>
+      let number = 28
+
+      const person = {
+        name: "selena",
+        sex: "female"
+      }
+
+      Object.defineProperty(person, "age", {
+        // value: 28,
+        // enumerable: true, // 是否可以枚举，默认false
+        // writable: false, // 是否可以被修改，默认false
+        // configurable: true, // 属性是否可以被删除，默认false
+
+        get() {
+          return number // number变化时，可以做到person.age跟着变化
+        },
+        set(value) {
+          number = value // 双向绑定。这样person.age变化，number变化；number变化，person.age也变化
+        }
+      })
+
+      console.log("person", person)
+    </script>
+  </body>
+</html>

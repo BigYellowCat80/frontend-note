@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <script src="./lib/jquery-easyui-1.9.12/jquery.easyui.min.js"></script>
+  <title>draggable</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="easyui-draggable" data-options="handle:'#title'"
+    style="width:400px;height:200px;background:#fafafa;border:1px solid #ccc;margin-top:10px">
+    <div id="title" style="padding:5px;background:#ccc;color:#fff">Title</div>
+  </div>
+
+  <script>
+    // 1. 引入jquery
+    // 2. 引入jquery easyui
+    // 3. 复制响应html代码 js都不用写
+  </script>
+</body>
+
+</html>

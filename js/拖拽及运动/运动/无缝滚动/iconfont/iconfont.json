@@ -1,0 +1,23 @@
+{
+  "id": "2407590",
+  "name": "无缝滚动",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "848594",
+      "name": "xiangyou",
+      "font_class": "xiangyou",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "893116",
+      "name": "left",
+      "font_class": "xiangzuo",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    }
+  ]
+}

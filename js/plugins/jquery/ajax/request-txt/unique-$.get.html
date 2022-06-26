@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>$.get</title>
+</head>
+
+<body>
+  <button>$.get</button>
+  <h3></h3>
+
+  <script>
+    $(function () {
+      $('button').on('click', function () {
+        $.get('./kimi.txt', function (data) {
+          data = data.replace('pig', 'dog');
+          $('h3').html(data);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

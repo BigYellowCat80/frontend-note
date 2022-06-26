@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>移动端点击穿透问题及解决办法</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 200px;
+      height: 200px;
+      background: #f44;
+    }
+
+    .close {
+      width: 100px;
+      height: 100px;
+      background: #44f;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 之所有有点击穿透问题 因为移动端有双击放大功能 用户碰触页面之后 需要等待一段时间来判断是不是双击 -->
+  <!-- 点击穿透问题 比如关闭对话款按钮下面有个a标签 touchstart关闭按钮后 300ms延迟后点击了a标签 页面就跳转了 -->
+
+  <!-- 解决办法 [都用touch事件, 使用touch事件时阻止默认行为, fastclick] -->
+
+  <div class="close"></div>
+  <div class="box"></div>
+
+  <script>
+    window.onload = function () {
+      var box = document.querySelector('.box');
+      var close = document.querySelector('.close');
+
+      close.addEventListener('touchstart', function (e) {
+        e = e || window.event;
+        if (e.preventDefault) {
+          e.preventDefault();
+        } else {
+          e.cancelBubble = true;
+        }
+
+        this.remove();
+      });
+
+      box.addEventListener('click', function () {
+        alert('box clicked.');
+      });
+
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全选</title>
+</head>
+
+<body>
+  <div class="box">
+    <div><label><input type="checkbox" id="select_all"> selecl all</label></div>
+    <ul>
+      <li><label><input type="checkbox"> apple</label></li>
+      <li><label><input type="checkbox"> banana</label></li>
+      <li><label><input type="checkbox"> mango</label></li>
+      <li><label><input type="checkbox"> watermelon</label></li>
+      <li><label><input type="checkbox"> kimi</label></li>
+    </ul>
+  </div>
+
+  <script>
+    const select_all = document.getElementById('select_all');
+    const inputs = [...document.querySelectorAll('.box>ul>li input')];
+
+    // 思路：
+    // 1. 点击全选，获取全选此时的状态，然后forEach设置子选项的状态
+    // 2. 如果子选项有一个状态是false，那全选就是false
+
+    select_all.onclick = function () {
+      let isChecked = this.checked;
+      inputs.forEach(el => {
+        el.checked = isChecked
+      })
+    };
+
+    inputs.forEach(el => {
+      el.onclick = function () {
+        let isChecked = true;
+        for (let item of inputs) {
+          if (!item.checked) {
+            isChecked = false;
+            break
+          }
+        }
+        select_all.checked = isChecked
+      }
+    })
+  </script>
+</body>
+
+</html>

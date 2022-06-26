@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./lib/jquery-ui-1.12.1/jquery-ui.css" type="text/css">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <script src="./lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+  <title>resizable</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+    }
+
+    #resizable {
+      width: 400px;
+      height: 200px;
+      border-radius: 4px;
+      background: #f44;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="resizable"></div>
+
+  <script>
+    // 1. 引入jquery ui样式
+    // 2. 引入jquery
+    // 3. 引入jquery ui （官网https://jqueryui.com/下载stable版本）
+    // 4. 指定元素使用jquery ui的方法即可
+
+    $(function () {
+      $('#resizable').resizable({
+        // ghost: true,
+        maxHeight: 300,
+        maxWidth: 600,
+        minHeight: 100,
+        minWidth: 200,
+      });
+    });
+
+    // 其他设置参考jquery ui中文手册https://www.jqueryui.org.cn/
+
+    /*
+      alsoResize
+      animate
+      animateDuration
+      animateEasing
+      aspectRatio: true 设置为true的话 比例跟原来一样 还可以设置为number 比如设置为2 那就是宽/长=2
+      autoHide: true 当用户鼠标没有悬浮在元素上时是否隐藏手柄
+      cancel 防止从指定的元素上开始调整尺寸
+      containment
+      delay
+      disabled
+      distance
+      ghost 如果设置为true 拖拉时有一个半透明的效果
+      grid
+      handles: "e,n" // 允许拉伸的方向
+      helper
+      maxHeight
+      maxWidth
+      minHeight
+      minWidth
+    */
+  </script>
+</body>
+
+</html>

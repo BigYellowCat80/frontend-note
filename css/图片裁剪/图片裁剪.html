@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片裁剪</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .img-box {
+      width: 200px;
+      height: 200px;
+      border: 2px solid orange;
+      margin: 10px;
+    }
+
+    .img-box {
+      position: relative;
+    }
+
+    .img-box img {
+      width: 100%;
+    }
+
+    .img1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      clip: rect(0px, 200px, 100px, 0px);
+    }
+
+    .img2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      clip: rect(0px, 100px, 100px, 0px);
+    }
+
+    .desc {
+      font-weight: bold;
+      padding-left: 30px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <ol class="desc">
+    <li>img标签position为absolute或者fixed才能裁剪</li>
+    <li>语法 clip: rect(top, right, bottom, left)</li>
+  </ol>
+
+  <div class="img-box"><img class="img1" src="./img/safe.jpg" alt=""></div>
+  <div class="img-box"><img class="img2" src="./img/safe.jpg" alt=""></div>
+</body>
+
+</html>

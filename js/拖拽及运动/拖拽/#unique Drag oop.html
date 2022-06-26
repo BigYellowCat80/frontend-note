@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag oop</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 200px;
+      height: 200px;
+      background: #f44;
+      position: absolute;
+    }
+
+    .sec {
+      background: #4f4;
+      left: 200px;
+    }
+
+    .third {
+      background: #44f;
+      left: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" id="first"></div>
+  <div class="box sec"></div>
+  <div class="box third"></div>
+
+
+  <script>
+    window.onload = function () {
+      new Drag('.box');
+    };
+
+    function Drag(selector) {
+      var _this = this;
+      this.block = Array.from(document.querySelectorAll(selector));
+      this.offsetX = 0;
+      this.offsetY = 0;
+      this.movingOffsetX = 0;
+      this.movingOffsetY = 0;
+      this.zIndex = 0;
+
+      this.block.forEach((element, index) => {
+        this.block[index].index = index;
+        element.onmousedown = function (e) {
+          _this.index = index;
+          // console.log(_this.index);
+          e = e || window.event;
+          _this.fnDown();
+          return false;
+        };
+      });
+    }
+
+    Drag.prototype.fnDown = function (e) {
+      var _this = this;
+      e = e || window.event;
+      this.block[_this.index].style.zIndex = ++_this.zIndex;
+      this.offsetX = e.pageX - this.block[_this.index].offsetLeft;
+      this.offsetY = e.pageY - this.block[_this.index].offsetTop;
+      document.onmousemove = function (e) {
+        _this.fnMove(e);
+      };
+      document.onmouseup = function (e) {
+        _this.fnUp(e);
+      };
+    };
+
+    Drag.prototype.fnMove = function (e) {
+      var _this = this;
+      e = e || window.event;
+      this.movingOffsetX = e.pageX - this.offsetX;
+      this.movingOffsetY = e.pageY - this.offsetY;
+      this.block[this.index].style.left = this.movingOffsetX + 'px';
+      this.block[this.index].style.top = this.movingOffsetY + 'px';
+    };
+
+    Drag.prototype.fnUp = function () {
+      document.onmousemove = null;
+      document.onmouseup = null;
+    };
+  </script>
+</body>
+
+</html>

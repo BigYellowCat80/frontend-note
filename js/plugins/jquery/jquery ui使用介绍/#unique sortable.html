@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <script src="./lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+  <title>sortable</title>
+  <style>
+    #sortable,
+    #list-fruit,
+    #list-animal {
+      background: #eee;
+      width: 200px;
+      border-radius: 4px;
+      padding: 20px;
+      list-style: none;
+      text-align: center;
+    }
+
+    li {
+      margin: 4px;
+      background: #4f4;
+      height: 36px;
+      line-height: 36px;
+    }
+
+    #sortable li.sortable-placeholder {
+      background: #ff4;
+    }
+
+    .box {
+      display: flex;
+    }
+
+    #list-fruit {
+      margin-right: 10px;
+    }
+
+    .fruit {
+      background: #f44;
+      color: #fff;
+      border-radius: 4px;
+    }
+
+    .animal {
+      background: #44f;
+      color: #fff;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <ul id="sortable">
+    <li>2</li>
+    <li>6</li>
+    <li>7</li>
+    <li>1</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+
+  <hr style="border:4px dashed #f44">
+
+  <div class="box">
+    <ul id="list-fruit">
+      <h3>Fruit</h3>
+      <li class="animal">monkey</li>
+      <li class="fruit">banana</li>
+      <li class="animal">cat</li>
+      <li class="fruit">apple</li>
+      <li class="animal">elephant</li>
+    </ul>
+
+    <ul id="list-animal">
+      <h3>Animal</h3>
+      <li class="fruit">watermelon</li>
+      <li class="animal">dog</li>
+      <li class="fruit">kiwi</li>
+      <li class="animal">lion</li>
+      <li class="fruit">mango</li>
+    </ul>
+  </div>
+
+  <script>
+    // 1. 引入jquery
+    // 2. 引入jquery ui （官网https://jqueryui.com/下载stable版本）
+    // 3. 指定元素使用jquery ui的方法即可
+
+
+    $(function () {
+      // 数组列表
+      $('#sortable').sortable({ placeholder: "sortable-placeholder" });
+
+
+      // 水果和动物列表
+      $('#list-fruit,#list-animal').sortable({
+        connectWith: "#list-fruit,#list-animal",
+        cancel: 'h3'
+      });
+    });
+
+    // 其他设置参考jquery ui中文手册https://www.jqueryui.org.cn/
+
+  </script>
+</body>
+
+</html>

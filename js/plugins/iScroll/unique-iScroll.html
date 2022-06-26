@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./iscroll-master/build/iscroll.js"></script>
+  <title>iScroll</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrapper {
+      max-width: 360px;
+      height: 200px;
+      margin: 0 auto;
+      background: #f44;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .wrapper ul {
+      list-style: none;
+    }
+
+    .wrapper ul>li {
+      width: 240px;
+      height: 100px;
+      margin: 0 auto 50px;
+      border-radius: 4px;
+      background: #44f;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+
+  <script>
+    // 1. 引入iscroll.js
+    // 2. new IScroll初始化
+    // 3. wrapper设置相对定位
+
+    window.onload = function () {
+      new IScroll(".wrapper", {
+        scrollbars: true,
+        fadeScrollbars: true,
+      });
+    };
+  </script>
+</body>
+
+</html>

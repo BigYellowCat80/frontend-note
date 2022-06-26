@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas 绘制太极图案</title>
+    <style>
+        body {
+            font: 13px "microsoft yahei", "sans-serif";
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        canvas {
+            background: lawngreen;
+        }
+        
+        .canvasWrapper {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>canvas 绘制太极图案</h1>
+    <div class="canvasWrapper">
+        <canvas id="c1" width="400" height="400">您的浏览器不支持html5的canvas元素</canvas>
+    </div>
+
+
+    <script>
+        window.onload = function() {
+            var c1 = document.getElementById('c1');
+            var p1 = c1.getContext('2d');
+            var linearStyle1 = p1.createLinearGradient(200, 0, 200, 400);
+            var linearStyle2 = p1.createLinearGradient(200, 0, 200, 400);
+            var radialStyle1 = p1.createRadialGradient(200, 100, 2, 200, 100, 10);
+            var radialStyle2 = p1.createRadialGradient(200, 300, 2, 200, 300, 10);
+
+
+            linearStyle1.addColorStop(0, 'white');
+            linearStyle1.addColorStop(1, 'black');
+            p1.fillStyle = linearStyle1;
+
+            // 先绘制半个填充好
+            p1.arc(200, 200, 200, Math.PI * 1.5, Math.PI * 0.5);
+            p1.arc(200, 300, 100, Math.PI * 0.5, Math.PI * 1.5);
+            p1.arc(200, 100, 100, Math.PI * 0.5, Math.PI * 1.5, true);
+
+            p1.fill();
+
+            // 在绘制另外一半
+            linearStyle2.addColorStop(0, 'black');
+            linearStyle2.addColorStop(1, 'white');
+            p1.fillStyle = linearStyle2;
+
+            p1.beginPath();
+            p1.arc(200, 200, 200, Math.PI * 0.5, Math.PI * 1.5);
+            p1.arc(200, 100, 100, Math.PI * 1.5, Math.PI * 0.5);
+            p1.arc(200, 300, 100, Math.PI * 1.5, Math.PI * 0.5, true);
+
+            p1.fill();
+
+            // 然后画里面两个小圆并填充渐变
+            radialStyle1.addColorStop(0, 'black');
+            radialStyle1.addColorStop(1, 'white');
+            p1.fillStyle = radialStyle1;
+
+            p1.beginPath();
+            p1.arc(200, 100, 10, 0, Math.PI * 2);
+            p1.fill();
+
+
+            radialStyle2.addColorStop(0, 'white');
+            radialStyle2.addColorStop(1, 'black');
+            p1.fillStyle = radialStyle2;
+
+            p1.beginPath();
+            p1.arc(200, 300, 10, 0, Math.PI * 2);
+            p1.fill();
+        }
+    </script>
+</body>
+
+</html>

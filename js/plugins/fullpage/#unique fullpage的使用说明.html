@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./fullPage.js-master/dist/fullpage.css" type="text/css">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <script src="./fullPage.js-master/dist/fullpage.js"></script>
+  <title>fullpage的使用说明</title>
+</head>
+
+<body>
+  <div id="fullpage">
+    <div class="section" style="background: #f44;"></div>
+    <div class="section" style="background: #4f4;"></div>
+    <div class="section" style="background: #44f;"></div>
+    <div class="section" style="background: #ff4;"></div>
+  </div>
+
+  <script>
+    // 1. 引入fullpage.min.css
+    // 2. 引入jquery
+    // 3. 引入fullpage.min.js
+    // 4. html按照模板写好
+    // 5. 脚本初始化 
+    // 6. 配置参考https://www.jianshu.com/p/17309f770242
+
+    $(function () {
+      // 4. 初始化
+      $('#fullpage').fullpage({
+        navigation: true,
+      });
+    });
+  </script>
+</body>
+
+</html>

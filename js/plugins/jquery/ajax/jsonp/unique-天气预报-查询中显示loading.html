@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>天气预报-查询中显示loading</title>
+  <style>
+    .loading {
+      display: none;
+      margin-top: 8px;
+    }
+
+    input {
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" class="txt" placeholder="城市名称"> <br>
+  <button class="btn">查询</button>
+  <span class="loading">Loading...</span>
+
+  <script>
+    $(function () {
+      function check(url) {
+        return new Promise((resolve, reject) => {
+          $.ajax({
+            url: `${url}?city=${$('.txt').val().trim()}`,
+            dataType: 'jsonp',
+            success: function (data) {
+              resolve(data);
+            },
+            error: function (msg) {
+              reject(msg);
+            }
+          })
+        });
+      }
+
+
+      $('.btn').on('click', function () {
+        $('.loading').css('display', 'block');
+        check('https://query.asilu.com/weather/baidu')
+          .then(data => {
+            console.log(data);
+          })
+          .catch(() => {
+            console.log('请求失败');
+          })
+          .finally(() => {
+            $('.loading').css('display', 'none');
+          })
+      });
+
+      $('.txt').on('keyup', function (e) {
+        if (e.keyCode == 13) {
+          $('.btn').triggerHandler('click');
+        }
+      });
+
+    });
+  </script>
+</body>
+
+</html>

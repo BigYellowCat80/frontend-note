@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>transform注意点</title>
+  <style>
+    p {
+      margin-bottom: 0;
+      width: 300px;
+      text-align: center;
+    }
+
+    .scale,
+    .rotate {
+      width: 300px;
+      height: 300px;
+      background: #eee;
+      margin-bottom: 10px;
+    }
+
+    .scale>div,
+    .rotate>div {
+      width: 100px;
+      height: 100px;
+    }
+
+    .scale>div:nth-child(2) {
+      transform: translateX(100px) scale(.5);
+    }
+
+    .scale>div:nth-child(3) {
+      transform: scale(.5) translateX(100px);
+    }
+
+
+
+    .rotate>div:nth-child(2) {
+      transform: translateY(-100px) rotateZ(45deg);
+    }
+
+    .rotate>div:nth-child(3) {
+      transform: rotateZ(45deg) translateY(-100px);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- translate会受到scale rotate skew影响 -->
+  <!-- scale后坐标跟着缩放 rotate后坐标跟着转动 -->
+
+  <p>scale后坐标跟着缩放</p>
+  <div class="scale">
+    <div style="background: #f44;" class="first"></div>
+    <div style="background: #4f4;" class="second"></div>
+    <div style="background: #44f;" class="third"></div>
+  </div>
+
+  <p>rotate后坐标跟着转动</p>
+  <div class="rotate">
+    <div style="background: #f44;" class="first"></div>
+    <div style="background: #4f4;" class="second"></div>
+    <div style="background: #44f;" class="third"></div>
+  </div>
+</body>
+
+</html>

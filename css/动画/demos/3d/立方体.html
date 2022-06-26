@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>立方体.</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ol,
+    ul {
+      list-style: none;
+    }
+
+    p {
+      font-weight: bold;
+      margin-top: 20px;
+      margin-left: 20px;
+    }
+
+    .container {
+      perspective: 500px;
+      display: flex;
+      width: 400px;
+      margin: 50px auto 0;
+    }
+
+    .box {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 50px;
+      line-height: 100px;
+      transform-style: preserve-3d;
+      transition: 2s;
+    }
+
+    .box1:hover {
+      transform: rotateX(360deg);
+    }
+
+    .box2:hover {
+      transform: rotateY(-360deg);
+    }
+
+    .box li {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+
+    .top {
+      transform: rotateX(90deg) translateZ(50px);
+    }
+
+    .back {
+      transform: translateZ(-50px) rotateX(180deg);
+    }
+
+    .bottom {
+      transform: rotateX(-90deg) translateZ(50px);
+    }
+
+    .front {
+      transform: translateZ(50px);
+    }
+
+    .left {
+      transform: rotateY(-90deg) translateZ(50px);
+    }
+
+    .right {
+      transform: rotateY(90deg) translateZ(50px);
+    }
+  </style>
+</head>
+
+<body>
+  <p>6个面的父元素ul要加上transition和transform-style: preserve-3d;</p>
+  <p>让6个面的父元素ul旋转 ul的父元素要加上perspective</p>
+  <div class="container">
+    <ul class="box box1">
+      <li style="background: #f44;" class="top">top</li>
+      <li style="background: #4f4;" class="back">back</li>
+      <li style="background: #44f;" class="bottom">bottom</li>
+      <li style="background: #ff4;" class="front">front</li>
+      <li style="background: #f4f;" class="left">left</li>
+      <li style="background: #4ff;" class="right">right</li>
+    </ul>
+    <ul class="box box2">
+      <li style="background: #f44;" class="top">top</li>
+      <li style="background: #4f4;" class="back">back</li>
+      <li style="background: #44f;" class="bottom">bottom</li>
+      <li style="background: #ff4;" class="front">front</li>
+      <li style="background: #f4f;" class="left">left</li>
+      <li style="background: #4ff;" class="right">right</li>
+    </ul>
+  </div>
+</body>
+
+</html>

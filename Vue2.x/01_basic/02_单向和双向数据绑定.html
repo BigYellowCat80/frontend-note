@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>单向和双向数据绑定</title>
+    <style>
+      input {
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h3>hello {{world}}</h3>
+      <input type="text" v-model="text" />
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          world: "world",
+          text: "hahaha"
+        }
+      })
+
+      // 单项绑定（v-bind）：数据只能从data流向页面
+      // 双向绑定（v-model）：数据不仅能从data流向页面，还可以从页面流向data
+
+      // 备注：双向绑定一般应用在表单元素上（如input、select等用于可以输入的表单元素）
+    </script>
+  </body>
+</html>

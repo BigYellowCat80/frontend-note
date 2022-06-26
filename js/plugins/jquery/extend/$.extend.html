@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>$.extend</title>
+</head>
+
+<body>
+
+
+  <script>
+    $(function () {
+      /* 
+      1. 语法
+         1.1 $.extend([deep], target, [obj1], [obj2]);
+         1.2 $.extend(obj) target默认是$ 给$构造函数拓展方法
+      */
+
+      // 1.1.1 deep默认值为false
+      var obj1 = {
+        apple: 50,
+        banana: 20,
+        mango: { price: 60, color: 'yellow' }
+      };
+
+      var obj2 = {
+        apple: 60,
+        banana: 30,
+        mango: { price: 70, weight: 100 },
+        watermelon: 300
+      };
+
+      // 这就是浅拷贝 只是指向同一个地址
+      $.extend(obj1, obj2);
+      console.log(obj1); // obj1属性没有的给加上 有的直接完全覆盖 {apple: 60, banana: 30, mango: {price: 70, weight: 100}, watermelon: 300}
+      console.log(obj2); // 没变
+
+      obj1.mango.price = 888888;
+      console.log(obj1.mango.price); // 888888
+      console.log(obj2.mango.price); // 888888
+
+      // 1.1.2 deep默认值为false
+      var obj3 = {
+        apple: 50,
+        banana: 20,
+        mango: { price: 60, color: 'yellow' }
+      };
+
+      var obj4 = {
+        apple: 60,
+        banana: 30,
+        mango: { price: 70, weight: 100 },
+        watermelon: 300
+      };
+
+      $.extend(true, obj3, obj4);
+      console.log(obj3); // obj3属性没有的给加上 如果有属性里有对象值 对象里的属性没有的加上 对象里的属性有的覆盖 {apple: 60, banana: 30, mango: {price: 70, color: "yellow", weight: 100}, watermelon: 300}
+
+      console.log(obj4); // 没变
+
+      // 这就是深拷贝 复制一份
+      obj4.mango.price = 888888;
+      console.log(obj3.mango.price); // 70
+      console.log(obj4.mango.price); // 888888
+
+
+      // 1.2 $.extend(obj) target默认是$ 给$构造函数拓展方法
+      $.extend({
+        sayHello: function () { console.log('hello world.'); }
+      });
+
+      $.sayHello(); // hello world.
+
+
+      // 自执行函数里添加也行 但是觉得没有这个必要
+      (function (o) {
+        o.extend({ sayHi: function () { console.log('hi.'); } });
+      })($);
+
+      $.sayHi(); // hi.
+    });
+  </script>
+</body>
+
+</html>

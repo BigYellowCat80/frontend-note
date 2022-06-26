@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <title>jquery轮播图</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+    }
+
+    #box {
+      width: 750px;
+      height: 390px;
+      margin: 40px auto 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #content {
+      height: 100%;
+      width: 500%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    #content li {
+      float: left;
+    }
+
+    #content li img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    #panel {
+      display: flex;
+      /* background: red; */
+      z-index: 100;
+      width: 200px;
+      height: 20px;
+      position: absolute;
+      justify-content: space-evenly;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10%;
+    }
+
+    #panel li {
+      width: 20px;
+      height: 20px;
+      background: #eee;
+      border-radius: 50%;
+      opacity: 0.8;
+      filter: alpha(opacity=80);
+      cursor: pointer;
+    }
+
+    #panel li.active {
+      background: #44f;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <ul id="content">
+
+    </ul>
+
+    <ol id="panel">
+      <li class="active"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ol>
+  </div>
+  <script>
+    const imgs = [
+      "https://s10.mogucdn.com/mlcdn/c45406/180926_45fkj8ifdj4l824l42dgf9hd0h495_750x390.jpg",
+      "https://s10.mogucdn.com/mlcdn/c45406/180926_31eb9h75jc217k7iej24i2dd0jba3_750x390.jpg",
+      "https://s10.mogucdn.com/mlcdn/c45406/180919_3f62ijgkj656k2lj03dh0di4iflea_750x390.jpg",
+      "https://s10.mogucdn.com/mlcdn/c45406/180917_18l981g6clk33fbl3833ja357aaa0_750x390.jpg",
+    ];
+
+
+    $(function () {
+      // 1. 加载图片
+      let str = "";
+      imgs.forEach((element, index) => {
+        str += `<li><img src="${element}" alt=""></li>`;
+      });
+      str += `<li><img src="${imgs[0]}" alt=""></li>`;
+      $('#content')[0].innerHTML = str;
+      let currentIndex = 0;
+
+      // 2. 绑定btn点击事件
+      $('#panel li').on('click', function () {
+        // console.log($(this).index());
+        currentIndex = $(this).index();
+        tab();
+      });
+
+      // 3. 开启定时器
+      let timer = null;
+      timer = setInterval(function () {
+        currentIndex++;
+        tab();
+      }, 3000);
+
+      // 4. 绑定box的移入移出事件
+      $('#box').on({
+        mouseenter: function () {
+          clearInterval(timer);
+        },
+        mouseleave: function () {
+          timer = setInterval(function () {
+            currentIndex++;
+            tab();
+          }, 3000);
+        }
+      });
+
+
+
+      function tab() {
+
+        if (currentIndex >= 4) {
+          $('#panel li').eq(0).addClass('active').siblings().removeClass('active');
+        } else {
+          $('#panel li').eq(currentIndex).addClass('active').siblings().removeClass('active');
+        }
+
+        $('#content').animate({ left: -750 * currentIndex }, 400, "swing", function () {
+          console.log("currentIndex " + currentIndex + " at ontransitionend");
+          if (currentIndex >= 4) {
+            currentIndex = 0;
+            $('#content').animate({ left: 0 }, 0);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

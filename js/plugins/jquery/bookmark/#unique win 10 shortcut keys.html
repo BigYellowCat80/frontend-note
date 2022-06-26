@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./lib/jquery-1.11.3.min.js"></script>
+    <title>win 10 shortcut keys</title>
+    <style>
+        html,
+        body,
+        div,
+        table,
+        thead,
+        tbody,
+        tr,
+        th,
+        td {
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 520px;
+            margin: 50px auto;
+            border-collapse: collapse;
+            text-align: left;
+            font: bold 13px "microsoft yahei", "sans-serif";
+        }
+
+        table caption {
+            font-size: 20px;
+        }
+
+        thead {
+            background: cyan;
+        }
+
+        th,
+        td {
+            padding: 4px 8px;
+        }
+
+        tbody tr {
+            cursor: pointer;
+        }
+
+        tbody tr:hover {
+            background: #0f0;
+
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1">
+        <caption>Win 10</caption>
+        <thead>
+            <tr>
+                <th>Shortcut Keys</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Win + A</td>
+                <td>打开右侧控制中心</td>
+            </tr>
+            <tr>
+                <td>Win + Alt + D</td>
+                <td>打开桌面时间</td>
+            </tr>
+            <tr>
+                <td>Win + I</td>
+                <td>打开设置</td>
+            </tr>
+            <tr>
+                <td>Win + U</td>
+                <td>打开Display设置</td>
+            </tr>
+
+            <tr>
+                <td>Win + P</td>
+                <td>投影设置</td>
+            </tr>
+            <tr>
+                <td>Win + Shift + S</td>
+                <td>快速截图</td>
+            </tr>
+            <tr>
+                <td>Win + V</td>
+                <td>打开剪贴板</td>
+            </tr>
+            <tr>
+                <td>Win + ./;</td>
+                <td>打开Emoji</td>
+            </tr>
+            <tr>
+                <td>Win + 数字</td>
+                <td>桌面对应应用</td>
+            </tr>
+            <tr>
+                <td>Win + Shift + 数字</td>
+                <td>桌面对应应用新实例</td>
+            </tr>
+            <tr>
+                <td>Win + Alt + 数字</td>
+                <td>对应应用右键</td>
+            </tr>
+            <tr>
+                <td>Win + ▲</td>
+                <td>最大化窗口</td>
+            </tr>
+            <tr>
+                <td>Win + Shift + ▲</td>
+                <td>高度为屏幕的100% 宽度不变</td>
+            </tr>
+            <tr>
+                <td>Win + ◀/▶</td>
+                <td>窗口占屏幕一半</td>
+            </tr>
+            <tr>
+                <td>Win + Shift + ◀/▶</td>
+                <td>窗口移动到另一显示器</td>
+            </tr>
+            <tr>
+                <td>Win + Space</td>
+                <td>切换到下一种输入法</td>
+            </tr>
+            <tr>
+                <td>Win + Ctrl + Space</td>
+                <td>切换到上一种输入法</td>
+            </tr>
+            <tr>
+                <td>Win + Ctrl + D</td>
+                <td>创建虚拟桌面</td>
+            </tr>
+            <tr>
+                <td>Win + Ctrl + ◀/▶</td>
+                <td>切换虚拟桌面</td>
+            </tr>
+            <tr>
+                <td>Win + Ctrl + F4</td>
+                <td>关闭虚拟桌面</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+    <script>
+        $(function () {
+            $('tbody').on('click', 'tr', function (e) {
+                $(this).css('background', '#0f0');
+                $(this).siblings().css('background', '');
+
+            });
+        });
+    </script>
+</body>
+
+</html>

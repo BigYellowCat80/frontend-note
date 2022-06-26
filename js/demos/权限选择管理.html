@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>权限选择管理</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 8px;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .box {
+      width: 400px;
+      height: 192px;
+      box-shadow: 1px 1px 4px #000;
+      display: flex;
+      text-align: center;
+    }
+
+    .left,
+    .right {
+      flex: 1;
+    }
+
+    .center {
+      width: 120px;
+      background: #eee;
+    }
+
+    .list li {
+      height: 24px;
+      line-height: 24px;
+      cursor: pointer;
+      text-transform: capitalize;
+    }
+
+    .left .list li:hover {
+      background: #44f;
+      color: #fff;
+    }
+
+    .right .list li:hover {
+      background: #44f;
+      color: #fff;
+    }
+
+    .selected {
+      background: #44f;
+      color: #fff;
+    }
+
+    .center {
+      display: flex;
+      flex-flow: column nowrap;
+      box-sizing: border-box;
+      padding: 20px;
+      justify-content: space-evenly;
+    }
+
+    .center button {
+      height: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+
+    <div class="left">
+      <ul class="list"></ul>
+    </div>
+
+    <div class="center">
+      <button>&gt;</button>
+      <button>&gt;&gt;</button>
+      <button>&lt;</button>
+      <button>&lt;&lt;</button>
+    </div>
+
+    <div class="right">
+      <ul class="list"></ul>
+    </div>
+
+  </div>
+
+  <script>
+    const access_right = ['apple', 'banana', 'mango', 'watermelon', 'kiwi', 'orange'];
+
+    const left_list = document.querySelector('.left>.list');
+    const right_list = document.querySelector('.right>.list');
+
+    // 1. 先渲染
+    for (let item of access_right) {
+      const li = document.createElement('li');
+      li.innerHTML = item;
+      left_list.append(li);
+    }
+
+    // 2. 点击变色
+    left_list.onclick = right_list.onclick = function (e) {
+      e = e || window.event;
+      const target = e.target || e.srcElement;
+      if (target === this) { return }
+      target.isSelected = !target.isSelected;
+      target.className = target.isSelected ? 'selected' : '';
+    }
+
+    // 3. 按钮事件
+    const center = document.querySelector('.center');
+    center.onclick = function (e) {
+      e = e || window.event;
+      const target = e.target || e.srcElement;
+      if (target === this) { return }
+      const textContent = target.textContent;
+      switch (textContent) {
+        case '>':
+          update(left_list, right_list, false)
+          break;
+        case '>>':
+          update(left_list, right_list, true)
+          break;
+        case '<':
+          update(right_list, left_list, false)
+          break;
+        case '<<':
+          update(right_list, left_list, true)
+          break;
+      }
+    }
+
+    function update(from, to, isAll) { // from和to是ul元素
+      const fromLis = [...from.querySelectorAll('li')];
+      if (isAll) {
+        fromLis.forEach(el => {
+          el.isSelected = true;
+          el.className = 'selected';
+          to.append(el);
+        })
+      } else {
+        fromLis.filter(el => el.isSelected)
+          .forEach(el => {
+            to.append(el);
+          })
+      }
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>

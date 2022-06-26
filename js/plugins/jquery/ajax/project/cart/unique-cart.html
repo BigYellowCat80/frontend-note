@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./iconfont/iconfont.css" type="text/css">
+  <link rel="stylesheet" href="./bootstrap-4.5.3/dist/css/bootstrap.css" type="text/css">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <script src="./jquery-cookie-master/src/jquery.cookie.js"></script>
+  <script src="./parabola/parabola.js"></script>
+  <title>cart</title>
+  <style>
+    .container #ball {
+      display: none;
+      width: 50px;
+      height: 50px;
+      background: black;
+      position: absolute;
+      border-radius: 50%;
+      overflow: hidden;
+      left: 0;
+      top: -15px;
+      z-index: 100;
+    }
+
+    .container #ball img {
+      width: 100%;
+    }
+
+    .card-body {
+      text-align: center;
+    }
+
+    .cart-btn {
+      position: fixed;
+      z-index: 10;
+      bottom: 15px;
+      right: 15px;
+      border: 2px dotted orange;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      text-align: center;
+      background: #fff;
+    }
+
+    .cart-btn>i {
+      font-style: normal;
+      font-size: 40px;
+      color: orange;
+    }
+
+    .cart-btn>span {
+      position: absolute;
+      right: -2px;
+      top: -2px;
+      width: 15px;
+      height: 15px;
+      line-height: 15px;
+      background: orange;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+    }
+
+    .my-cart {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 20;
+      left: -100%;
+
+      display: flex;
+    }
+
+    .my-cart .left {
+      width: 80%;
+      min-height: 100%;
+      background: linear-gradient(to right bottom, #f44, #44f);
+      overflow: auto;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      padding: 10px;
+    }
+
+
+    .my-cart .right {
+      width: 20%;
+      min-height: 100%;
+    }
+
+    .change-quantity-box span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .change-quantity-box span.change-quantity:hover {
+      background: #4f4;
+      box-shadow: 1px 1px 1px black;
+    }
+
+    .change-quantity-box span.change-quantity:active {
+      box-shadow: -1px -1px 1px black;
+    }
+
+    .change-quantity-box span:nth-child(2) {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="cart-btn">
+    <i class="iconfont icon-xiazai1"></i>
+    <span>0</span>
+  </div>
+
+  <div class="container mt-3">
+    <div id="ball"></div>
+    <div class="row main">
+
+    </div>
+
+    <div class="my-cart">
+      <div class="left">
+        <div class="row">暂时没有任何商品</div>
+      </div>
+      <div class="right"></div>
+    </div>
+
+  </div>
+
+
+  <script>
+    $(function () {
+      // 1. 加载页面商品
+      $.ajax({
+        url: "data.json",
+        success: function (data) {
+          // console.log(data);
+          var content = "";
+          data.forEach(element => {
+            content += `<div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-4" id="${element.id}">
+                          <div class="card h-100">
+                            <img src="${element.img}" class="card-img-top">
+                            <div class="card-body">
+                              <h5 class="card-title">${element.description}</h5>
+                              <button class="btn btn-primary btn-sm">加入购物车</button>
+                            </div>
+                          </div>
+                        </div>`;
+          });
+          $('.container .main').html(content);
+        },
+        error: function (msg) { console.log(msg); },
+      });
+      updateTotalItems();
+      loadCartItems();
+
+
+      // 2. 给加入购物车按钮添加事件 
+      var items = "";
+      $('.container').on('click', 'button', function () {
+        var id = $(this).closest('.col-6')[0].id;
+        // console.log(id);
+
+        // 2.1 点击存进cookie
+        if (!$.cookie('items')) { // 如果没有存过cookie
+          items = [{ item: id, quantity: 1 }];
+        } else { // 存过cookie 还需要判断有没有存过这个商品
+          items = JSON.parse($.cookie('items'));
+          for (var i = 0; i < items.length; i++) {
+            if (items[i].item == id) {
+              items[i].quantity++;
+              break;
+            }
+          }
+          if (i == items.length) {
+            items.push({ item: id, quantity: 1 });
+          }
+        }
+        // console.log(items);
+        $.cookie('items', JSON.stringify(items), { expires: 7 }); // 不管怎样最后肯定是要存回cookie的
+        ballMove(this);
+
+      });
+
+
+      // 3. 点击购物车图标 展示我的购物车列表 点击空白处 我的购物车隐藏
+      $('.cart-btn').on('click', function () {
+        $('.my-cart')
+          .animate({ left: 0 }, 400);
+      });
+      $('.my-cart .right').on('click', function () {
+        $('.my-cart').animate({ left: "-100%" }, 400);
+      });
+
+
+      // 4. 数量加减事件
+      $('.my-cart').on('click', '.change-quantity', function () {
+        if ($(this).text() == "-") {
+          var id = $(this).closest('.col-6').attr('name');
+
+          items = JSON.parse($.cookie('items'));
+          for (var i = 0; i < items.length; i++) {
+            if (items[i].item == id && items[i].quantity > 1) {
+              items[i].quantity--;
+              break;
+            }
+          }
+
+          // console.log(items);
+        } else if ($(this).text() == "+") {
+          var id = $(this).closest('.col-6').attr('name');
+
+          items = JSON.parse($.cookie('items'));
+          for (var i = 0; i < items.length; i++) {
+            if (items[i].item == id) {
+              items[i].quantity++;
+              break;
+            }
+          }
+        }
+        $.cookie('items', JSON.stringify(items), { expires: 7 });
+        updateTotalItems();
+        loadCartItems();
+      });
+
+      function updateTotalItems() {
+        var total = 0;
+        if (!$.cookie('items')) { // 注意一下$.cookie('items')为假时直接解析会报错
+          return;
+        } else {
+          JSON.parse($.cookie('items'))
+            .forEach(ele => {
+              total += ele.quantity;
+            });
+        }
+        $('.cart-btn span').text(total);
+      }
+
+      function loadCartItems() {
+        if (!$.cookie('items')) {
+          $('.my-cart .left .row').html('暂时没有任何商品');
+        } else {
+          var content = "";
+          var arr = JSON.parse($.cookie('items'));
+          // console.log(arr);
+          $.ajax({ // 因为cookie只记录了商品id和数量 还要img 所以这里要再ajax请求一遍
+            url: "./data.json",
+            success: function (data) {
+              // console.log(data);
+              for (var i = 0; i < arr.length; i++) {
+                for (var j = 0; j < data.length; j++) {
+                  if (arr[i].item == data[j].id) {
+                    arr[i].img = data[j].img;
+                    arr[i].description = data[j].description;
+                    break;
+                  }
+                }
+              }
+
+              arr.forEach(ele => {
+                content += `<div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-4" name="${ele.item}">
+                              <div class="card h-100">
+                                <img src="${ele.img}" class="card-img-top">
+                                <div class="card-body">
+                                  <h5 class="card-title">${ele.description}</h5>
+                                  <div class="change-quantity-box">
+                                    <span class="change-quantity minus">-</span>
+                                    <span class="quantity">${ele.quantity}</span>
+                                    <span class="change-quantity add">+</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>`;
+              });
+              $('.my-cart .left').css({ display: 'block', color: '#000' });
+              $('.my-cart .left .row').html(content);
+
+            },
+            error: function (msg) { console.log(msg); }
+          });
+        }
+      }
+
+
+      function ballMove(element) {
+        var content = $(element).closest('.card').find('img')
+          .clone()
+          .removeAttr('class')[0].outerHTML;
+
+        $('#ball').html(content)
+          .css({
+            display: "block",
+            left: $(element).offset().left,
+            top: $(element).offset().top,
+          });
+
+        var offsetX = parseInt($('.cart-btn').offset().left - $("#ball").offset().left);
+        var offsetY = parseInt($('.cart-btn').offset().top - $("#ball").offset().top);
+
+        var ball = new Parabola({
+          el: '#ball',
+          duration: 800,
+          curvature: 0.001,
+          offset: [offsetX, offsetY],
+          callback: function () {
+            $("#ball").hide();
+            updateTotalItems();
+            loadCartItems();
+          }
+        });
+        ball.start();
+      }
+
+    });
+  </script>
+</body>
+
+</html>

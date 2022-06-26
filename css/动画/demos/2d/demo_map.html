@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>map</title>
+  <style>
+    .map {
+      border: 1px solid #eee;
+      width: 800px;
+      height: 360px;
+      margin: 0 auto;
+      background: url(./img/bgMap.png) no-repeat 0 0/cover;
+      position: relative;
+    }
+
+    .map .points {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background: #4b5cc4;
+      left: 618px;
+      top: 144px;
+    }
+
+    .map .points>div {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      left: -57px;
+      top: -57px;
+      /* 如何计算出57 |(大的宽度-小的宽度)/2+边框宽度| */
+      border-radius: 120px;
+      border: 2px solid #4b5cc4;
+      transform: scale(0.01);
+    }
+
+    .map .points>div:nth-child(1) {
+      animation: spotted 2s ease 0s infinite;
+    }
+
+    .map .points>div:nth-child(2) {
+      animation: spotted 2s ease 0.5s infinite;
+    }
+
+    .map .points>div:nth-child(3) {
+      animation: spotted 2s ease 1 infinite;
+    }
+
+    .map .points>div:nth-child(4) {
+      animation: spotted 2s ease 1.5s infinite;
+    }
+
+    @keyframes spotted {
+      100% {
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="map">
+    <div class="points">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+  </div>
+</body>
+
+</html>

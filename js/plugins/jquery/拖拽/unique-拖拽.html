@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>拖拽</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+    }
+
+    .second {
+      left: 216px;
+    }
+
+    .third {
+      left: 424px;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="background-color: #f44;" class="box first"></div>
+  <div style="background-color: #4f4;" class="box second"></div>
+  <div style="background-color: #44f;" class="box third"></div>
+
+  <script>
+    $(function () {
+      $(".box").on("mousedown", function (e) {
+        var offsetX = e.pageX - $(this).offset().left;
+        var offsetY = e.pageY - $(this).offset().top;
+        var _this = this;
+        $(document).on("mousemove", function (e) {
+          $(_this).css({
+            left: e.pageX - offsetX,
+            top: e.pageY - offsetY,
+          });
+        });
+      });
+      $(document).on("mouseup", function () {
+        $(document).off("mousemove");
+      });
+    });
+  </script>
+</body>
+
+</html>

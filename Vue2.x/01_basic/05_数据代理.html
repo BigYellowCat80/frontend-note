@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据代理</title>
+  </head>
+  <body>
+    <script>
+      const cat = { color: "yellow" }
+      let dog = {}
+
+      Object.defineProperty(dog, "color", {
+        get() {
+          return cat.color
+        },
+        set(value) {
+          cat.color = value
+        }
+      }) // 这样无论改cat.color还是dog.color，两个对象的color都跟着一起变
+
+      // 通过一个对象代理对另一个对象属性的操作（读/写）
+      // Vue中的数据代理，就是vm实例代理data中的属性
+    </script>
+  </body>
+</html>

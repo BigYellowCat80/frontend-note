@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>案例_必须用watch不能用computed的情况</title>
+    <style>
+      .box {
+        width: 600px;
+        height: 40px;
+        text-align: center;
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .box > div {
+        width: 200px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .box > div:nth-child(2) {
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 点击按钮，count加1。
+      square通过computed获取，值为count的平方。
+      triple通过watch处理，1秒后返回count的3倍
+    -->
+
+    <div id="app">
+      <div class="box">
+        <div class="count">count: {{count}}</div>
+        <div class="square">square: {{square}}</div>
+        <div class="square">triple: {{triple}}</div>
+      </div>
+      <button @click="add">add</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          count: 1,
+          triple: 3
+        },
+        methods: {
+          add() {
+            this.count++
+          }
+        },
+        computed: {
+          square() {
+            return this.count ** 2
+          }
+        },
+        watch: {
+          count: {
+            immediate: true,
+            handler(val) {
+              setTimeout(() => {
+                this.triple = 3 * val
+              }, 1000)
+            }
+          }
+        }
+      })
+
+      // computed和watch之前的区别：
+      // computed能完成的功能，watch都可以完成
+      // watch能完成的功能，computed不一定能完成。例如，watch里面可以处理异步。因为不是通过return出去的，是直接命令式修改的
+
+      // 原则：能用computed就用computed
+    </script>
+  </body>
+</html>

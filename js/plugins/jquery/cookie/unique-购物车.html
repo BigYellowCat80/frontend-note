@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <script src="./jquery-cookie-master/src/jquery.cookie.js"></script>
+  <title>购物车</title>
+  <style>
+    table {
+      width: 360px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    table th,
+    table td {
+      padding-top: 4px;
+      padding-bottom: 4px;
+      vertical-align: middle;
+    }
+
+    table span {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+
+    tfoot {
+      font-weight: bold;
+    }
+
+    .total-price {
+      color: #f44;
+    }
+  </style>
+</head>
+
+<body>
+  <table border="1" id="tab">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>ALL</td>
+        <td>/</td>
+        <td class="total-quantity"></td>
+        <td class="total-price"></td>
+      </tr>
+    </tfoot>
+  </table>
+
+
+  <script>
+    var items = [
+      { name: 'apple', price: 50, quantity: 2 },
+      { name: 'banana', price: 20, quantity: 3 },
+      { name: 'mango', price: 60, quantity: 3 },
+      { name: 'watermelon', price: 300, quantity: 1 },
+    ];
+
+    $(function () {
+      // 1. 初始化数据
+      init();
+
+
+      // 2. 加减按钮
+      $('#tab').on('click', '.minus', function () {
+        var index = $(this).closest('tr').index();
+        if (items[index].quantity > 1) {
+          items[index].quantity--;
+
+          $.cookie('items', JSON.stringify(items), { expires: 7 });
+
+          init();
+          console.log(JSON.parse($.cookie('items')));
+        } else {
+          alert(`If you don't need this item, please delete it.`);
+        }
+      });
+      $('#tab').on('click', '.add', function () {
+        var index = $(this).closest('tr').index();
+        items[index].quantity++;
+        $.cookie('items', JSON.stringify(items), { expires: 7 });
+        init();
+        console.log(JSON.parse($.cookie('items')));
+      });
+
+
+      function init() {
+        if ($.cookie('items')) {
+          items = JSON.parse($.cookie('items'));
+        }
+
+        // 初始化数据
+        var content = "";
+        items.forEach(element => {
+          content += `<tr>
+              <td>${element.name}</td>
+              <td>${element.price.toFixed(2)}</td>
+              <td>
+                <button class="minus">-</button>
+                <span>${element.quantity}</span>
+                <button class="add">+</button>
+              </td>
+              <td>${(element.price * element.quantity).toFixed(2)}</td>
+            </tr>`;
+        });
+
+        $('#tab tbody').html(content);
+
+        var totalQuantity = 0;
+        var totalPrice = 0;
+        items.forEach(ele => {
+          totalQuantity += ele.quantity;
+          totalPrice += ele.quantity * ele.price;
+        });
+        $('.total-quantity').html(totalQuantity);
+        $('.total-price').html(totalPrice.toFixed(2));
+      }
+
+    });
+
+  </script>
+</body>
+
+</html>

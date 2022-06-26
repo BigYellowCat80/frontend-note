@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>watch的两种形式</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>Today is {{weather}}</h3>
+      <button @click="change">change</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          isHot: true
+        },
+        computed: {
+          weather() {
+            return this.isHot ? "hot" : "cold"
+          }
+        },
+        methods: {
+          change() {
+            this.isHot = !this.isHot
+          }
+        }
+        // 方式1
+        // watch: {
+        //   isHot: {
+        //     handler(newVal, oldVal) {
+        //       console.log(newVal, oldVal)
+        //     },
+        //     immediate: true
+        //   }
+        // }
+      })
+
+      // 方式2 使用原型上的"$watch
+      // console.log(vm.__proto__.hasOwnProperty("$watch"))
+
+      vm.$watch("isHot", {
+        handler(newVal, oldVal) {
+          console.log(newVal, oldVal)
+        },
+        immediate: true
+      })
+    </script>
+  </body>
+</html>

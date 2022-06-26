@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font: 13px "microsoft yahei", "sans-serif";
+        }
+        
+        h1,
+        h3 {
+            text-align: center;
+        }
+        
+        canvas {
+            background: lawngreen;
+        }
+    </style>
+    <title>canvas 绘制矩形</title>
+</head>
+
+<body>
+    <h1>canvas 绘制矩形</h1>
+    <h3>关键词 .getContext("2d") | lineWidth | strokeStyle | fillStyle</h3>
+    <!-- canvas元素默认大小是300px*150px 正确的写法应该是在行内写 如果在样式表上写就被拉伸了 -->
+    <!-- canvas元素的width和height是绘画区域实际宽度和高度 而style的width和height是canvas在浏览器中被渲染的高度和宽度 -->
+
+    <p>方法1 一笔一画 关键词 .beginPath() | .moveTo() | .lineTo() | .closePath() | .stroke()</p>
+    <canvas id="c1" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+    <p>方法2 关键词 .beginPath() | .rect() | .closePath() | .stroke()</p>
+    <canvas id="c2" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+    <p>方法3 关键词 .beginPath() | .strokeRect()</p>
+    <p>线宽以中心为基准</p>
+    <canvas id="c3" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+    <p>方法4 直接上色 .beginPath() | .fillRect()</p>
+    <canvas id="c4" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+    <p>方法5 画完再上色 .beginPath() | .rect() | .stroke() | .fill()</p>
+    <canvas id="c5" height="200" width="200">您的浏览器不支持html5的canvas元素</canvas>
+
+    <script>
+        window.onload = function() {
+            var c1 = document.getElementById('c1');
+            var p1 = c1.getContext('2d');
+
+            p1.lineWidth = 2;
+            p1.strokeStyle = "red";
+            // 方法1  一笔一画  关键词 .beginPath() .moveTo() .lineTo() .closePath() .stroke()
+            p1.beginPath();
+            p1.moveTo(50, 50);
+            p1.lineTo(150, 50);
+            p1.lineTo(150, 150);
+            p1.lineTo(50, 150);
+            p1.lineTo(50, 50);
+            p1.closePath();
+            p1.stroke();
+
+
+            // 方法2 关键词 .beginPath() | .rect() | .closePath() | .stroke()
+            var c2 = document.getElementById('c2');
+            var p2 = c2.getContext('2d');
+
+            p2.lineWidth = 2;
+            p2.strokeStyle = "blue";
+
+            p2.beginPath();
+            p2.rect(50, 50, 100, 100);
+            p2.closePath();
+            p2.stroke();
+
+            // 再画一个 记得先.beginPath()
+            p2.strokeStyle = "red";
+            p2.beginPath();
+            p2.rect(75, 75, 50, 50);
+            p2.closePath();
+            p2.stroke();
+
+
+            // 方法3 关键词 .beginPath() | .strokeRect()
+            var c3 = document.getElementById('c3');
+            var p3 = c3.getContext('2d');
+
+            p3.lineWidth = 50;
+            p3.strokeStyle = "blue";
+
+            p3.beginPath();
+            p3.strokeRect(50, 50, 100, 100);
+
+
+            // 方法4 直接上色 .beginPath() | .fillRect()
+            var c4 = document.getElementById('c4');
+            var p4 = c4.getContext('2d');
+
+            p4.fillStyle = "red";
+            p4.beginPath();
+            p4.fillRect(50, 50, 100, 100);
+
+
+            // 方法5 画完再上色 .beginPath() | .rect() | .stroke() | .fill()
+            var c5 = document.getElementById('c5');
+            var p5 = c5.getContext('2d');
+
+            p5.lineWidth = 50;
+            p5.strokeStyle = "red";
+            p5.fillStyle = "blue";
+
+            p5.beginPath();
+            p5.rect(50, 50, 100, 100);
+            p5.stroke();
+            p5.fill();
+
+
+
+        };
+    </script>
+
+    <script>
+    </script>
+</body>
+
+</html>

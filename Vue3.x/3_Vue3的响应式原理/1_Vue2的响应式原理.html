@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1_Vue2的响应式原理</title>
+  </head>
+  <body>
+    <script>
+      // Vue2
+      const person = {
+        name: "John",
+        age: 30
+      }
+
+      const p = {}
+      Object.keys(person).forEach((key) => {
+        Object.defineProperty(p, key, {
+          configurable: true, // 用于delete
+          get() {
+            console.log("get() Gonna update view")
+            return person[key]
+          },
+          set(value) {
+            console.log("set() Gonna update view")
+            person[key] = value
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

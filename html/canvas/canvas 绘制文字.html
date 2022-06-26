@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas 绘制文字</title>
+    <style>
+        body {
+            font: 13px "microsoft yahei", "sans-serif";
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        canvas {
+            background: lawngreen;
+        }
+        
+        .canvasWrapper {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>canvas 绘制文字</h1>
+
+    <div class="canvasWrapper">
+        <canvas id="c1" width="300" height="300">您的浏览器不支持html5的canvas元素</canvas>
+    </div>
+
+
+    <script>
+        window.onload = function() {
+            var c1 = document.getElementById('c1');
+            var p1 = c1.getContext('2d');
+
+            p1.lineWidth = 2;
+            p1.strokeStyle = 'blue';
+            p1.fillStyle = 'red';
+
+            // strokeText('显示文字',X,Y) 以左下角为origin
+            p1.font = '40px "microsoft yahei"';
+
+            p1.strokeText('ABC', 0, 300);
+            p1.fillText('ABC', 0, 300);
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsonp百度天气</title>
+  <style>
+    .loading {
+      width: 40px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .loading img {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="text">
+  <button id="btn">weather</button>
+  <div class="loading"><img src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt=""></div>
+
+  <script>
+    // https://query.asilu.com/weather/baidu?city=北京&callback=fn
+
+
+    document.getElementById('btn')
+      .onclick = function () {
+        const city = document.getElementById('text').value.trim();
+        const loading = document.querySelector('.loading');
+        if (!city) { return }
+        loading.style.display = 'block';
+
+        check_weather('https://query.asilu.com/weather/baidu', city)
+          .then(value => {
+            console.log(value?.weather);
+          })
+          .catch(reason => {
+            console.log(reason);
+          })
+          .finally(() => {
+            loading.style.display = 'none';
+          })
+      }
+
+    function check_weather(url, city) {
+      return new Promise((resolve, reject) => {
+        let json;
+        window.fn = function (data) { json = data }
+        const script = document.createElement('script');
+        script.src = `${url}?city=${city}&callback=fn`;
+        document.body.appendChild(script);
+
+        script.onload = function () { resolve(json) }
+        script.onerror = function () { reject(json) }
+      })
+    }
+  </script>
+</body>
+
+</html>

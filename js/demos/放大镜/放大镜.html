@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>放大镜</title>
+  <style>
+    body {
+      display: flex;
+    }
+
+    .box {
+      width: 384px;
+      height: 216px;
+      border: 1px solid orange;
+      position: relative;
+    }
+
+    .box img {
+      width: 100%;
+    }
+
+    .box .drag {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, .4);
+      display: none;
+      top: 0;
+      left: 0;
+    }
+
+    .zoomIn {
+      border: 1px solid orange;
+      width: 400px;
+      height: 400px;
+      margin-left: 10px;
+      display: none;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .zoomIn img {
+      height: 216%;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <img src="./img/cat.jpg" alt="">
+    <div class="drag"></div>
+  </div>
+
+  <div class="zoomIn">
+    <img src="./img/cat.jpg" alt="">
+  </div>
+
+  <script>
+    window.onload = function () {
+      // 1. 移入图片时 遮罩显示 放大镜也显示 移出则不显示
+      var box = document.querySelector('.box');
+      var drag = document.querySelector('.drag');
+      var zoomIn = document.querySelector('.zoomIn');
+
+      box.onmouseover = function () {
+        drag.style.display = "block";
+        zoomIn.style.display = "block";
+      };
+      box.onmouseout = function () {
+        drag.style.display = "none";
+        zoomIn.style.display = "none";
+      };
+
+      // 2. 鼠标移动时 遮罩跟着移动 并且限制出界 放大镜图片也跟着反向移动
+      box.onmousemove = function (e) {
+        e = e || window.event;
+        var left = e.pageX - this.clientLeft - this.offsetLeft - drag.offsetWidth / 2;
+        var top = e.pageY - this.clientTop - this.offsetTop - drag.offsetHeight / 2;
+        left = limited(left, 0, box.clientWidth - drag.offsetWidth);
+        top = limited(top, 0, box.clientHeight - drag.offsetHeight);
+
+        drag.style.left = left + 'px';
+        drag.style.top = top + 'px';
+
+        zoomIn.children[0].style.left = -4 * left + 'px';
+        zoomIn.children[0].style.top = -4 * top + 'px';
+
+      };
+
+    };
+
+    function limited(num, min, max) {
+      if (num <= min) { num = min; } else if (num >= max) { num = max };
+      return num;
+    }
+
+
+
+  </script>
+</body>
+
+</html>

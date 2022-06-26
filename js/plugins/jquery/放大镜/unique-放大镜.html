@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>放大镜</title>
+  <style>
+    body {
+      display: flex;
+    }
+
+    .box {
+      width: 384px;
+      height: 216px;
+      border: 1px solid orange;
+      position: relative;
+    }
+
+    .box img {
+      width: 100%;
+    }
+
+    .box .drag {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, .4);
+      display: none;
+      top: 0;
+      left: 0;
+    }
+
+    .box:hover .drag {
+      display: block;
+    }
+
+    .box:hover+.zoomIn {
+      display: block;
+    }
+
+    .zoomIn {
+      border: 1px solid orange;
+      width: 400px;
+      height: 400px;
+      margin-left: 10px;
+      display: none;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .zoomIn img {
+      height: 216%;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <img src="./img/cat.jpg" alt="">
+    <div class="drag"></div>
+  </div>
+
+  <div class="zoomIn">
+    <img src="./img/cat.jpg" alt="">
+  </div>
+
+  <script>
+
+    $(function () {
+      // 1. 鼠标在box内移动时 遮罩跟着移动 并且限制出界
+      $('.box').on('mousemove', function (e) {
+        var left = e.pageX - $(this).offset().left - 1 - $('.drag').outerWidth() / 2;
+        var top = e.pageY - $(this).offset().top - 1 - $('.drag').outerHeight() / 2;
+        left = limited(left, 0, $(this).innerWidth() - $('.drag').outerWidth());
+        top = limited(top, 0, $(this).innerHeight() - $('.drag').outerHeight());
+
+
+        // 遮罩
+        $('.drag').css({
+          left: left,
+          top: top,
+        });
+
+        // 放大镜图片
+        $('.zoomIn>img').css({
+          left: -4 * left,
+          top: -4 * top,
+        });
+
+      });
+    });
+
+    function limited(num, min, max) {
+      if (num <= min) { num = min; } else if (num >= max) { num = max };
+      return num;
+    }
+  </script>
+</body>
+
+</html>

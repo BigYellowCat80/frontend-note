@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html,
+        body,
+        frame {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        iframe {
+            height: 100%;
+            float: left;
+        }
+        
+        #frameA {
+            width: 25%;
+        }
+        
+        #frameB {
+            width: 75%;
+        }
+    </style>
+    <title>frame</title>
+</head>
+
+<body>
+    <iframe src="./frameA.html" id="frameA" frameborder="0"></iframe>
+    <iframe src="./frameB.html" id="frameB" frameborder="0"></iframe>
+</body>
+
+</html>

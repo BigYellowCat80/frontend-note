@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>碰撞原理</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+    }
+
+    .second {
+      left: 218px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="first box" style="background: #4f4;"></div>
+  <div class="second box" style="background: #44f;"></div>
+
+  <script>
+    window.onload = function () {
+      new Drag('.box');
+    };
+
+
+    function Drag(selector) {
+      var _this = this;
+      this.block = Array.from(document.querySelectorAll(selector));
+      this.offsetX = 0;
+      this.offsetY = 0;
+      this.movingOffsetX = 0;
+      this.movingOffsetY = 0;
+      this.zIndex = 0;
+
+      this.block.forEach((element, index) => {
+        this.block[index].index = index;
+        element.onmousedown = function (e) {
+          _this.index = index;
+          // console.log(_this.index);
+          e = e || window.event;
+          _this.fnDown();
+          return false;
+        };
+      });
+    }
+
+    Drag.prototype.fnDown = function (e) {
+      var _this = this;
+      e = e || window.event;
+      this.block[_this.index].style.zIndex = ++_this.zIndex;
+      this.offsetX = e.pageX - this.block[_this.index].offsetLeft;
+      this.offsetY = e.pageY - this.block[_this.index].offsetTop;
+      document.onmousemove = function (e) {
+        _this.fnMove(e);
+      };
+      document.onmouseup = function (e) {
+        _this.fnUp(e);
+      };
+    };
+
+    Drag.prototype.fnMove = function (e) {
+      var _this = this;
+      e = e || window.event;
+      this.movingOffsetX = e.pageX - this.offsetX;
+      this.movingOffsetY = e.pageY - this.offsetY;
+      this.block[this.index].style.left = this.movingOffsetX + 'px';
+      this.block[this.index].style.top = this.movingOffsetY + 'px';
+      if (knock(this.block[0], this.block[1])) {
+        this.block.forEach(ele => { ele.style.background = '#f44' });
+      } else {
+        this.block[0].style.background = '#4f4';
+        this.block[1].style.background = '#44f';
+      }
+    };
+
+    Drag.prototype.fnUp = function () {
+      document.onmousemove = null;
+      document.onmouseup = null;
+    };
+
+
+    function knock(first, second) {
+      var firstLeft = first.offsetLeft;
+      var firstRight = first.offsetLeft + first.offsetWidth;
+      var firstTop = first.offsetTop;
+      var firstBottom = first.offsetTop + first.offsetHeight;
+
+      var secondLeft = second.offsetLeft;
+      var secondRight = second.offsetLeft + second.offsetWidth;
+      var secondTop = second.offsetTop;
+      var secondBottom = second.offsetTop + second.offsetHeight;
+
+      if (secondLeft > firstRight || secondRight < firstLeft || secondTop > firstBottom || secondBottom < firstTop) {
+        return false; // 这样就肯定碰不上
+      } else {
+        return true;
+      }
+    }
+  </script>
+</body>
+
+</html>

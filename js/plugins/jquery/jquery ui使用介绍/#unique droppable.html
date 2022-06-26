@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <script src="./lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+  <title>droppable</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .reference {
+      width: 50px;
+      height: 40px;
+      background: #44f;
+      position: absolute;
+      top: 0;
+      left: 80%;
+      border-radius: 4px;
+    }
+
+    #parent {
+      width: 400px;
+      height: 40px;
+      background: #f44;
+      position: relative;
+      margin-left: 80px;
+      margin-top: 40px;
+      border-radius: 4px;
+    }
+
+    #child {
+      width: 40px;
+      height: 40px;
+      background: #4f4;
+      position: relative;
+      z-index: 1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="parent">
+    <div class="reference"></div>
+    <div id="child"></div>
+  </div>
+
+  <script>
+    // 1. 引入jquery
+    // 2. 引入jquery ui （官网https://jqueryui.com/下载stable版本）
+    // 3. 指定元素使用jquery ui的方法即可
+
+
+    $(function () {
+      $('#child').draggable({
+        axis: 'x',
+        containment: "parent"
+      });
+      $('#parent').droppable({
+        drop: function () {
+          if ($('#child').position().left >= 320 && $('#child').position().left <= 330) {
+            $(this).children('.reference').css('background', 'orange');
+          }
+
+        }
+      });
+    });
+
+    // 其他设置参考jquery ui中文手册https://www.jqueryui.org.cn/
+
+    /*
+      accept: "#draggable" 接受哪些元素给放进去
+      activeClass
+      addClasses
+      disabled
+      greedy: true 如果设置为true 那么只放在droppable上 没有放在droppable的父元素上
+      hoverClass
+      scope 除了droppable的accept选项之外 一个与droppable带有相同的scope值的draggable会被该droppable接受
+      tolerance
+    */
+  </script>
+</body>
+
+</html>

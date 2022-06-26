@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$相关用法</title>
+  <style>
+    body {
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    img {
+      border: 2px solid orange;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./img/regexp $$用法.png" alt="">
+
+  <script>
+    var str = "123456";
+    var REGEXP = /34/;
+    console.log(str.replace(REGEXP, "$$")); // 12$56
+    console.log(str.replace(REGEXP, "-$&-")); // 12-34-56
+    console.log(str.replace(REGEXP, "$`")); // 121256
+    console.log(str.replace(REGEXP, "$'")); // 125656
+
+
+    var str = "12,34,56";
+    var REGEXP = /(\d{2})(,)/gi;
+    console.log(str.replace(REGEXP, "$1")); // 123456
+    console.log(str.replace(/\d{2}/gi, "'$&'")); // '12','34','56'
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>动态进度条</title>
+  <style>
+    div {
+      width: 200px;
+      height: 30px;
+      border-radius: 4px;
+      margin: 40px auto 0;
+      background: linear-gradient(to right top, #f44 25%, #4f4 25%, #4f4 50%, #f44 50%, #f44 75%, #4f4 75%) 0 0/30px;
+      animation: move 2s linear 0s infinite;
+    }
+
+    @keyframes move {
+      0% {}
+
+      100% {
+        background-position: 30px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+</body>
+
+</html>

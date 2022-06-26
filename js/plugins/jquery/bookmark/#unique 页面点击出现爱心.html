@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>页面点击出现爱心</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    div {
+      width: 40px;
+      height: 40px;
+      font-size: 36px;
+      line-height: 40px;
+      text-align: center;
+      user-select: none;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body style="height: 2000px;">
+
+
+  <script>
+    $(function () {
+      $(document).on('click', function (e) {
+        // 设置样式
+        var $element = $('<div>❤</div>');
+        $element.css({
+          color: randomColor(),
+          left: e.pageX - 18 + "px",
+          top: e.pageY - 50 + "px"
+        });
+        $(document.body).append($element);
+        $element.animate({
+          top: e.pageY - 200,
+          opacity: 0
+        }, 2000, "swing", function () {
+          setTimeout(() => {
+            $(this).remove();
+          }, 2000);
+        })
+      });
+
+    });
+
+
+    function randomNum() {
+      return parseInt(Math.random() * 256);
+    }
+    function randomColor() {
+      return `rgb(${randomNum()}, ${randomNum()}, ${randomNum()})`;
+    }
+  </script>
+</body>
+
+</html>

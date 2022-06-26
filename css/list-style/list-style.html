@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>list-style</title>
+  <style>
+    .zero {
+      list-style: decimal-leading-zero;
+    }
+
+    /* list-style: list-style-type list-style-position list-style-image; 
+    接受一个两个三个关键词，不限顺序 */
+
+    .gradient {
+      list-style-image: linear-gradient(to right bottom, red, blue);
+    }
+
+    .pic {
+      list-style-image: url(./img/good.png);
+    }
+
+    .icon>li {
+      position: relative;
+      list-style: none;
+    }
+
+    .icon>li::before {
+      content: "❤";
+      position: absolute;
+      top: 0;
+      left: -22px;
+      color: #f44;
+    }
+  </style>
+</head>
+
+<body>
+
+  <ol class="zero">
+    <li></li>
+    <li></li>
+    <li></li>
+  </ol>
+
+  <ol class="gradient">
+    <li></li>
+    <li></li>
+    <li></li>
+  </ol>
+
+  <ol class="pic">
+    <li></li>
+    <li></li>
+    <li></li>
+  </ol>
+
+  <ol class="icon">
+    <li>a</li>
+    <li>b</li>
+    <li>c</li>
+  </ol>
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>el与data的两种写法</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>hello {{msg}}</h3>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        // el: "#app", // el第1种写法
+        // data: { // data第1种写法
+        //   msg: "world"
+        // },
+
+        // data第2种写法
+        data() {
+          return {
+            msg: "world"
+          }
+        }
+      })
+
+      vm.$mount("#app") // el的第2种写法。这种写法更加灵活，还可以写在定时器里，1秒后再挂载。$mount是Vue.prototype上的方法
+
+      /* el的两种写法
+        1. 在options里写el: "#app"
+        2. vm.$mount("#app")
+      */
+
+      /* data的两种写法
+        1. 对象
+        2. 函数
+      */
+    </script>
+  </body>
+</html>

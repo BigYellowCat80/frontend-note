@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .link {
+        display: block;
+        margin-bottom: 10px;
+        color: #000;
+        margin-left: 4px;
+      }
+
+      .list {
+        display: flex;
+        list-style: none;
+        color: #fff;
+        margin: 2px;
+        padding: 0;
+        font: 14px "microsoft yahei";
+      }
+
+      .list > li {
+        background-color: #0075ff;
+        height: 30px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 2px;
+        border-radius: 2px;
+      }
+    </style>
+    <title>Vue3.x打卡</title>
+  </head>
+  <body>
+    <div class="container">
+      <a
+        href="https://www.bilibili.com/video/BV1Zy4y1K7SH?p=144"
+        target="_blank"
+        class="link"
+        >https://www.bilibili.com/video/BV1Zy4y1K7SH?p=144</a
+      >
+
+      <ol class="list">
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+      </ol>
+
+      <ol class="list">
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+      </ol>
+
+      <ol class="list">
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+      </ol>
+
+      <ol class="list">
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+      </ol>
+
+      <ol class="list">
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+      </ol>
+    </div>
+
+    <script>
+      const finishded = 168
+      ;[...document.querySelectorAll("li")].forEach((el, i) => {
+        el.prepend(i + 136)
+        i + 136 <= finishded && (el.children[0].checked = true)
+      })
+    </script>
+  </body>
+</html>

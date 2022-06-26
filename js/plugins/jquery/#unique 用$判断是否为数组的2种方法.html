@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>用$判断是否为数组的2种方法</title>
+</head>
+
+<body>
+  <script>
+    $(function () {
+      // 1. $.isArray
+      // 2. $.type() == array
+
+      console.log($.isArray([])); // true
+      console.log($.type([])); // array
+
+
+      // 原生的也有两种方法
+      // 1. Array.isArray
+      // 2. instanceof
+      console.log(Array.isArray([])); // true
+      console.log([] instanceof Array); // true
+    });
+  </script>
+</body>
+
+</html>

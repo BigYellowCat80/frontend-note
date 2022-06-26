@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>属性和方法测试</title>
+</head>
+
+<body>
+
+  <script>
+
+    let map = new Map();
+    map.set('apple', 50);
+    map.set('apple', 50);
+    map.set('banana', 20);
+    map.set('watermelon', 300);
+    console.log(map);
+    // Map(3) {"apple" => 50, "banana" => 20, "watermelon" => 300}
+
+
+    console.log(map.entries());
+    // MapIterator {"apple" => 50, "banana" => 20, "watermelon" => 300}
+
+    console.log(map.keys());
+    // MapIterator {"apple", "banana", "watermelon"}
+
+    console.log(map.values());
+    // MapIterator {50, 20, 300}
+
+
+    // 遍历
+    for (let i of map) {
+      console.log(i);
+      // console.log(i instanceof Array); // true
+    }
+    // (2) ["apple", 50]
+    // (2) ["banana", 20]
+    // (2) ["watermelon", 300]
+
+  </script>
+</body>
+
+</html>

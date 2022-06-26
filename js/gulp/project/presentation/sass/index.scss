@@ -1,0 +1,19 @@
+$length: 200px;
+
+.box{
+  width: $length;
+  height: $length;
+  line-height:  $length;
+  background: #f44;
+  margin-bottom: 10px;
+  color:#fff;
+  text-align: center;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button{
+  appearance: none;
+}
+
+
+img{width: 384px;height: 216px;}

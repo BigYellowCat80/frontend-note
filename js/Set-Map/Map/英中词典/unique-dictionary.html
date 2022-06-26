@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./bootstrap-4.5.3/dist/css/bootstrap.css" type="text/css">
+
+  <title>dictionary</title>
+  <style>
+    .container {
+      max-width: 360px;
+      margin: 40px auto 0;
+    }
+
+    .alert {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control form-control-lg" placeholder="Input English word here" id="txt">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="search">Search</button>
+      </div>
+    </div>
+
+    <div class="alert alert-primary" role="alert" id="result">
+
+    </div>
+  </div>
+
+  <script src="./dictionary.js"></script>
+  <script>
+    window.onload = function () {
+      // console.log(dictionary);
+      var arr = dictionary.split("\n");
+      const map = new Map();
+      for (var i = 0; i < arr.length - 1; i += 2) {
+        map.set(arr[i].slice(1).trim().toLowerCase(), arr[i + 1].slice(6).trim());
+      }
+
+
+      var txt = document.getElementById('txt');
+      var search = document.getElementById('search');
+      var result = document.getElementById('result');
+
+      txt.onkeyup = search.onclick = function () {
+        var val = txt.value.trim();
+        if (!val) {
+          result.style.display = 'none';
+          return;
+        } else {
+          result.innerHTML = check(val);
+        }
+      }
+
+      function check(val) {
+        // console.log(val);
+        var cn = 'No result matched.'
+
+        if (val.toLowerCase().length == 1) {
+          cn = '字母' + val;
+        } else if (map.get(val)) {
+          cn = map.get(val);
+        }
+
+        result.style.display = 'block';
+        return cn;
+      }
+    };
+  </script>
+</body>
+
+</html>

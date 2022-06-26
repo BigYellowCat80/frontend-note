@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-if配合template使用</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="show=true">show</button>
+      <template v-if="show">
+        <div>apple</div>
+        <div>banana</div>
+        <div>mango</div>
+      </template>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          show: false
+        }
+      })
+
+      // template只能配合v-if使用，不能配合v-show使用
+      // template优势在于，渲染时template这个标签没有了。因此结构没有改变
+
+      /* v-if和v-show的区别
+         v-if是元素不在DOM里面了，因此js可能获取不到该DOM节点
+         v-show只是display为none，js可以获取到该DOM节点
+       */
+    </script>
+  </body>
+</html>

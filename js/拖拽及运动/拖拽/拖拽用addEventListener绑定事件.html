@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拖拽用addEventListener绑定事件</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 200px;
+      height: 200px;
+      background: #f44;
+      position: absolute;
+    }
+
+    .sec {
+      background: #4f4;
+      left: 200px;
+    }
+
+    .third {
+      background: #44f;
+      left: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <div class="box sec"></div>
+  <div class="box third"></div>
+
+  <script>
+    var box = Array.from(document.querySelectorAll('.box'));
+    var zIndex = 0;
+    box.forEach((element, index) => {
+      addEventListener(element, 'mousedown', fnDown);
+
+      function fnDown(e) {
+        e = e || window.ecent;
+        var offsetX = e.pageX - element.offsetLeft;
+        var offsetY = e.pageY - element.offsetTop;
+        element.style.zIndex = ++zIndex;
+
+        addEventListener(document, 'mousemove', fnMove);
+        addEventListener(document, 'mouseup', fnUp);
+
+        function fnMove(e) {
+          e = e || window.ecent;
+
+          var movingOffsetX = e.pageX - offsetX;
+          var movingOffsetY = e.pageY - offsetY;
+          var lmtX = limited(movingOffsetX, 0, window.innerWidth - element.offsetWidth);
+          var lmtY = limited(movingOffsetY, 0, window.innerHeight - element.offsetHeight);
+
+          element.style.left = lmtX + 'px';
+          element.style.top = lmtY + 'px';
+        };
+
+        function fnUp() {
+          removeEventListener(document, 'mousemove', fnMove);
+          removeEventListener(document, 'mouseup', fnUp);
+        }
+        return false;
+      }
+    });
+
+    function limited(num, min, max) {
+      if (num <= min) { num = min; } else if (num >= max) { num = max };
+      return num;
+    }
+    // console.log(window.innerWidth);
+    // console.log(window.innerHeight);
+
+    function addEventListener(element, type, fn) {
+      if (element.addEventListener) {
+        element.addEventListener(type, fn, false);
+      } else if (element.attachEvent) {
+        element.attachEvent("on" + type, fn);
+      } else {
+        element["on" + type] = fn;
+      }
+    }
+
+    function removeEventListener(element, type, fn) {
+      if (element.addEventListener) {
+        element.removeEventListener(type, fn, false);
+      } else if (element.attachEvent) {
+        element.detachEvent("on" + type, fn);
+      } else {
+        element["on" + type] = null;
+      }
+    }
+  </script>
+</body>
+
+</html>

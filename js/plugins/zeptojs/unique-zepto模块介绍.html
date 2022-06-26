@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./zepto-master/dist/zepto.js"></script>
+  <title>zepto模块介绍</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background: #f44;
+      margin-top: 20px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="btn">button</button>
+  <div class="box"></div>
+
+  <script>
+    // 1. 下载https://github.com/madrobby/zepto
+    // 2. 默认5个核心模块[zepto, event, ajax, form, ie] 如果需要动画需要自定义模块 
+    // 3. 如animate模块 zepto-master目录下找到make文件 搜索module加上需要的模块 modules = (env['MODULES'] || 'zepto event ajax form ie fx fx_methods').split(' ')
+    // 4. zepto-master目录下下载依赖打包即可使用 4.1 npm i  4.2 npm run dist
+    // 5. 引入dist文件夹的zepto.js即可
+
+    $(function () {
+
+      $('.btn').on('click', function () {
+        $('.box').animate({ width: 400 }, 400, function () {
+          alert('OK');
+        })
+      });
+
+    });
+  </script>
+</body>
+
+</html>

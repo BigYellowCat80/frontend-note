@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <script src="./lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+  <title>draggable</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+    }
+
+    #draggable {
+      width: 400px;
+      height: 200px;
+      border-radius: 4px;
+      display: flex;
+      flex-flow: column nowrap;
+      overflow: hidden;
+    }
+
+    #draggable .header {
+      height: 36px;
+      width: 100%;
+      background: #f44;
+    }
+
+    #draggable .content {
+      width: 100%;
+      background: #4f4;
+      flex-grow: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="draggable">
+    <div class="header"></div>
+    <div class="content"></div>
+  </div>
+
+  <script>
+    // 1. 引入jquery
+    // 2. 引入jquery ui （官网https://jqueryui.com/下载stable版本）
+    // 3. 指定元素使用jquery ui的方法即可
+
+    $(function () {
+      $('#draggable').draggable({
+        cancel: '.content'
+      });
+    });
+
+    // 其他设置参考jquery ui中文手册https://www.jqueryui.org.cn/
+
+    /*
+      addClasses:false 阻止ui-draggable这个class名被添加 当在数百个元素上调用.draggable() 时 这么设置有利于性能优化 默认值true
+      appendTo:"body" 要放在哪个元素里
+      axis:"x" 设置只能水平或垂直拖动
+      cancel: "#draggable .content" 防止从指定元素上进行拖拽 比如可以设置内容部门拖拽不了 只能在标题那进行拖拽
+      handle: ".head" 跟cancel相反
+      connectToSortable: "#sortable" 允许draggable放置在指定的sortable上
+      containment: "parent" 约束在指定元素或区域的边界内拖拽 可能的值："parent"、"document"、"window"
+      cursor: "crosshair" 拖拽操作期间的CSS光标
+      cursorAt: { left: 20 } 鼠标光标的偏移 没啥用
+      delay: 300 按下后300毫秒才可以拖拽 防止误拖
+      distance: 50 防止误拖
+      disabled: true 禁用拖拽效果
+      grid: [50, 50] 按格子拖动 对齐用
+      helper: "clone" 拖动时出现一个虚线框
+      opacity: 0.8 拖拽时的不透明度
+      revert: true 拖拽后是否回到原处
+      revertDuration: 1000 回到原处需要的时间
+      scroll: false 默认值是true 拖动时父元素是否自动滚动
+      scrollSensitivity: 50 以指针算 到什么距离开始自动滚动
+      scrollSpeed: 100 滚动的速度
+      snap: true 跟吸附功能差不多 当设置为true时 元素会对齐到其它可拖拽（draggable）元素
+      snapMode: "outer" 决定draggable将对齐到对齐元素的哪个边缘 可能的值："inner"、"outer"、"both"
+      snapTolerance:20
+      zIndex: 100 拖拽时的zIndex
+      stack: ".box" 总是在当前选择器的前面
+    */
+  </script>
+</body>
+
+</html>

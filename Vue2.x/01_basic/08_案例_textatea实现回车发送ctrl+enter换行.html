@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>案例_textatea实现回车发送ctrl+enter换行+enter换行</title>
+    <style>
+      .textarea {
+        width: 240px;
+        height: 100px;
+        outline: none;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <textarea
+        class="textarea"
+        v-model="textarea"
+        @keydown.enter.prevent="send"
+      ></textarea>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          textarea: ""
+        },
+        methods: {
+          send(e) {
+            if (e.ctrlKey) return (this.textarea += "\n")
+            console.log(this.textarea)
+            this.textarea = ""
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

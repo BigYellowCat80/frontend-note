@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>finish和stop</title>
+  <style>
+    body {
+      padding-bottom: 400px;
+    }
+
+    div {
+      width: 200px;
+      height: 200px;
+      margin: 4px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .first {
+      background: #f44;
+    }
+
+    .second {
+      background: #4f4;
+    }
+
+    .third {
+      background: #44f;
+    }
+
+    .fourth {
+      background: #ff4;
+    }
+
+    .fifth {
+      background: #4ff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="first">finish() 直接跳到动画终点</div>
+  <div class="second">stop() stopAll?false goToEnd?false</div>
+  <div class="third">stop(true, true)</div>
+  <div class="fourth">stop(true)</div>
+  <div class="fifth">stop(false, true)</div>
+  <script>
+    $(function () {
+      // finish
+      $('.first').on('mouseenter', function () {
+        $(this).animate({ width: 400 }, 3000).animate({ height: 400 }, 3000);
+      });
+      $('.first').on('click', function () {
+        $(this).finish();
+      });
+
+
+      // stop([stopAll], [goToEnd])
+      $('.second').on('mouseenter', function () {
+        $(this).animate({ width: 400 }, 3000).animate({ height: 400 }, 3000);
+      });
+      $('.second').on('click', function () {
+        $(this).stop();
+      });
+
+
+      // stop(true, true)
+      $('.third').on('mouseenter', function () {
+        $(this).animate({ width: 400 }, 3000).animate({ height: 400 }, 3000);
+      });
+      $('.third').on('click', function () {
+        $(this).stop(true, true);
+      });
+
+
+      // stop(true)
+      $('.fourth').on('mouseenter', function () {
+        $(this).animate({ width: 400 }, 3000).animate({ height: 400 }, 3000);
+      });
+      $('.fourth').on('click', function () {
+        $(this).stop(true);
+      });
+
+      // stop(false, true)
+      $('.fifth').on('mouseenter', function () {
+        $(this).animate({ width: 400 }, 3000).animate({ height: 400 }, 3000);
+      });
+      $('.fifth').on('click', function () {
+        $(this).stop(false, true);
+      });
+    });
+  </script>
+</body>
+
+</html>

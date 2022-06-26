@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2_Vue3的响应式原理</title>
+  </head>
+  <body>
+    <script>
+      const person = {
+        name: "John",
+        age: 30
+      }
+
+      const p = new Proxy(person, {
+        get(target, propName) {
+          // 查
+          console.log(`get ${propName}, Gonna update view`)
+          // return target[propName]
+          return Reflect.get(target, propName)
+        },
+        set(target, propName, value) {
+          // 增 改
+          console.log(`set ${propName}, Gonna update view`)
+          // target[propName] = value
+          Reflect.set(target, propName, value)
+        },
+        deleteProperty(target, propName) {
+          // 删
+          console.log(`deleteProperty ${propName}, Gonna update view`)
+          // return delete target[propName]
+          return Reflect.deleteProperty(target, propName)
+        }
+      })
+
+      const obj = {
+        a: 1,
+        b: 2
+      }
+
+      console.log(window.Reflect.get(obj, "a"))
+      console.log(window.Reflect.set(obj, "a", 100))
+      console.log(window.Reflect.get(obj, "a"))
+      console.log(window.Reflect.deleteProperty(obj, "b"))
+      console.log(obj)
+
+      const x1 = Reflect.defineProperty(obj, "c", {
+        get() {
+          return 3
+        }
+      })
+
+      const x2 = Reflect.defineProperty(obj, "c", {
+        get() {
+          return 4
+        }
+      })
+
+      console.log("x1, x2", x1, x2)
+
+      if (x2) {
+        console.log("define success")
+      } else {
+        console.log("define fail")
+      }
+    </script>
+  </body>
+</html>

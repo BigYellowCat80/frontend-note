@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>unique-loading-line</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 25px;
+      margin: 40px auto 0;
+      /* background: red; */
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+
+    .box div {
+      width: 16px;
+      height: 16px;
+      border-radius: 16px;
+      animation: scale 1.2s linear infinite;
+      background: #888;
+      transform: scale(0);
+    }
+
+
+    @keyframes scale {
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(.4);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div style="animation-delay: 0s;"></div>
+    <div style="animation-delay: 0.2s;"></div>
+    <div style="animation-delay: 0.4s;"></div>
+    <div style="animation-delay: 0.6s;"></div>
+    <div style="animation-delay: 0.8s;"></div>
+    <div style="animation-delay: 1.0s;"></div>
+  </div>
+</body>
+
+</html>

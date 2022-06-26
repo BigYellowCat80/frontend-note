@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字符串_数组_对象绑定class</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .bg-red {
+        background-color: #f55;
+      }
+
+      .bg-green {
+        background-color: #5f5;
+      }
+
+      .bg-blue {
+        background-color: #55f;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h3>string</h3>
+      <div class="box string-box" :class="string" @click="changeString">
+        click me
+      </div>
+      <!-- 适用于绑定的类名不确定，需要动态指定 -->
+
+      <hr />
+
+      <h3>array</h3>
+      <div class="box" :class="array" @click="changeArray">click me</div>
+      <!-- 适用于绑定的类名不确定，个数不确定 -->
+
+      <hr />
+
+      <h3>object</h3>
+      <div class="box" :class="object" @click="changeObject">click me</div>
+      <!-- 适用于绑定的类名个数确定，名字也确定，但要动态决定 -->
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          string: "bg-red",
+          array: [],
+          object: {
+            "bg-red": false,
+            "bg-green": false
+          }
+        },
+        methods: {
+          changeString() {
+            this.string = this.string === "bg-red" ? "bg-green" : "bg-red"
+          },
+          changeArray() {
+            console.log("changeArray")
+            this.array.push("bg-red")
+
+            setTimeout(() => this.array.push("bg-green"), 1000)
+            setTimeout(() => this.array.push("bg-blue"), 2000)
+          },
+          changeObject() {
+            this.object["bg-red"] = true
+
+            setTimeout(() => (this.object["bg-green"] = true), 1000)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

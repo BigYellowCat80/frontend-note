@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input checkbox样式美化</title>
+    <style>
+        .toggle {
+            appearance: none;
+            -webkit-appearance: none;
+            height: 40px;
+            width: 80px;
+            border-radius: 40px;
+            outline: none;
+            position: relative;
+            box-shadow: 1px 1px 1px #ccc, -1px -1px 1px #ccc;
+            transition: 400ms;
+            cursor: pointer;
+        }
+
+        .toggle::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #eee;
+            position: absolute;
+            left: -5px;
+            top: -5px;
+            transition: 400ms;
+        }
+
+        .toggle:checked {
+            background: #9ed900;
+        }
+
+        .toggle:checked::after {
+            left: 35px;
+        }
+
+        label {
+            cursor: pointer;
+            width: 48px;
+            display: block;
+            margin-top: 20px;
+        }
+
+        label input {
+            display: none;
+        }
+
+        label input:checked+div {
+            background: url(./img/checkbox.png) no-repeat -42px -22px;
+        }
+
+        label div {
+            width: 48px;
+            height: 48px;
+            background: url(./img/checkbox.png) no-repeat -42px -190px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" class="toggle">
+
+    <label>
+        <input type="checkbox">
+        <div></div>
+    </label>
+</body>
+
+</html>

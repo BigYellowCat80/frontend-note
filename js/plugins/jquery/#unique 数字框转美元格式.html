@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>数字框转美元格式</title>
+  <style>
+    input[type=text] {
+      width: 120px;
+      height: 36px;
+      line-height: 36px;
+      padding: 0 4px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="num">
+
+  <script>
+    $(function () {
+      // 1. 过滤非数字的字符
+      $('#num').on('keydown', function (e) {
+        if ((getKeyCode(e) < 48 || (getKeyCode(e) > 57 && getKeyCode(e) < 96) || getKeyCode(e) > 105) && getKeyCode(e) != 8 && getKeyCode(e) != 37 && getKeyCode(e) != 39 && getKeyCode(e) != 110 && getKeyCode(e) != 190) {
+          return false;
+        }
+      });
+
+      $('#num').on('change', function () {
+        var val = '';
+        if ($(this).val().trim()[0] == '$') {
+          $(this).val($(this).val().slice(1));
+        }
+        val = +(+$(this).val()).toFixed(2)
+        val = '$' + val.toLocaleString();
+        console.log(val);
+        $(this).val(val);
+      });
+
+
+    });
+
+    function getKeyCode(e) {
+      e = e || event;
+      if (e.which == null) {
+        e.which = (e.charCode != null) ? e.charCode : e.keyCode;
+      }
+      return e.which;
+    }
+  </script>
+</body>
+
+</html>

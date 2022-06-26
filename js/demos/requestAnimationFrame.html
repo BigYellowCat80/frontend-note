@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>requestAnimationFrame</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #btn {
+      padding: 4px 16px;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      background: #f44;
+      margin-top: 10px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .reference {
+      width: 300px;
+      height: 20px;
+      line-height: 20px;
+      background: #44f;
+      text-align: center;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">run</button>
+  <div id="box">100px</div>
+  <div class="reference">300px</div>
+
+  <script>
+    window.onload = function () {
+      const btn = document.getElementById('btn');
+      const box = document.getElementById('box');
+
+      let start;
+      function run(duration) {
+        if (!start) { start = duration }
+        const timeUsed = duration - start;
+        box.style.transform = `translateX(${Math.min(timeUsed / 10, 200)}px)`; // 这里使用Math.min()确保元素刚好停在200px的位置。
+        if (timeUsed < 2000) { requestAnimationFrame(run) } // 2秒后停止
+      }
+
+      btn.onclick = function () {
+        requestAnimationFrame(run)
+      }
+    }
+  </script>
+</body>
+
+</html>

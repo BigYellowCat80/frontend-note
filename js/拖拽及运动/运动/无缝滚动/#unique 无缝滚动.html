@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./iconfont/iconfont.css" type="text/css">
+  <title>无缝滚动</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #box {
+      width: 880px;
+      height: 160px;
+      border: 1px solid #000;
+      margin: 100px auto 0;
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .list {
+      list-style: none;
+      height: 160px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      position: absolute;
+    }
+
+    .list>li {
+      width: 200px;
+      height: 120px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #box .iconfont-box {
+      position: absolute;
+      z-index: 3000;
+      cursor: pointer;
+      opacity: .6;
+      filter: alpha(opacity=60);
+      /* background: #fff; */
+      width: 50px;
+      height: 100%;
+      text-align: center;
+    }
+
+    #box .iconfont-box:hover {
+      opacity: .8;
+      filter: alpha(opacity=80);
+    }
+
+    #box .iconfont {
+      font-size: 50px;
+      line-height: 160px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .left {
+      left: 0px;
+
+    }
+
+    .icon-xiangzuo {
+      position: relative;
+      right: -25%
+    }
+
+    .icon-xiangyou {
+      position: relative;
+      right: -25%
+    }
+
+    .right {
+      right: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <div class="iconfont-box left"><span class="iconfont icon-xiangzuo"></span></div>
+    <div class="iconfont-box right"><span class="iconfont icon-xiangyou"></span></div>
+    <ul class="list">
+      <li style="background: #f44;"></li>
+      <li style="background: #4f4;"></li>
+      <li style="background: #44f;"></li>
+      <li style="background: #ff4;"></li>
+    </ul>
+  </div>
+
+  <script>
+    window.onload = function () {
+      // 1. 先把ul宽度变成2倍
+      var list = document.querySelector('#box .list');
+      list.innerHTML += list.innerHTML;
+      list.style.width = list.offsetWidth * 2 + 'px';
+
+      // 2. 开定时器
+      var speed = -1;
+      var timer = setInterval(function () {
+        linearMove(speed);
+      }, 15);
+
+      // 3. 鼠标移上去关闭定时器
+      var box = document.getElementById('box');
+      box.onmouseenter = function () {
+        clearInterval(timer);
+      };
+      box.onmouseleave = function () {
+        timer = setInterval(function () {
+          linearMove(speed);
+        }, 15);
+      };
+
+      // 4. 向左运动向右运动事件
+      var left = document.querySelector('#box .left');
+      var right = document.querySelector('#box .right');
+      left.onclick = function () { speed = -1; };
+      right.onclick = function () { speed = 1; };
+
+      function linearMove(speed) {
+        list.style.left = list.offsetLeft + speed + 'px';
+        if (Math.abs(list.offsetLeft) >= list.offsetWidth / 2) {
+          list.style.left = '0px';
+        } else if (list.offsetLeft > 0) {
+          list.style.left = -list.offsetWidth / 2 + 'px';
+        }
+      }
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>精灵图-滑稽</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .list {
+      list-style: none;
+      width: 360px;
+      height: 360px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-evenly;
+      align-content: space-evenly;
+      margin: 40px auto 0;
+      background: black;
+      border-radius: 4px;
+    }
+
+    .list>li {
+      width: 100px;
+      height: 100px;
+      border-radius: 4px;
+      background-color: #f44;
+      cursor: pointer;
+    }
+
+    .list>li:nth-child(1):hover {
+      background: url(./img/精灵图.jpg) no-repeat 0 0;
+    }
+
+    .list>li:nth-child(2):hover {
+      background: url(./img/精灵图.jpg) no-repeat -100px 0;
+    }
+
+    .list>li:nth-child(3):hover {
+      background: url(./img/精灵图.jpg) no-repeat -200px 0;
+    }
+
+    .list>li:nth-child(4):hover {
+      background: url(./img/精灵图.jpg) no-repeat 0 -100px;
+    }
+
+    .list>li:nth-child(5):hover {
+      background: url(./img/精灵图.jpg) no-repeat -100px -100px;
+    }
+
+    .list>li:nth-child(6):hover {
+      background: url(./img/精灵图.jpg) no-repeat -200px -100px;
+    }
+
+    .list>li:nth-child(7):hover {
+      background: url(./img/精灵图.jpg) no-repeat 0 -200px;
+    }
+
+    .list>li:nth-child(8):hover {
+      background: url(./img/精灵图.jpg) no-repeat -100px -200px;
+    }
+
+    .list>li:nth-child(9):hover {
+      background: url(./img/精灵图.jpg) no-repeat -200px -200px;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="list">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</body>
+
+</html>

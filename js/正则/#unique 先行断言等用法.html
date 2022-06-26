@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>先行断言等用法</title>
+</head>
+
+<body>
+
+
+  <script>
+    // 1. (?:pattern) 匹配的也拿到
+    var str = "kimi kimi1 kimi2 kimi3";
+    var REGEXP = /kimi(?:1|2)/gi;
+    console.log(str.match(REGEXP)); // (2) ["kimi1", "kimi2"]
+
+    // 2. 先行断言 x(?=y) 匹配'x'仅仅当'x'后面跟着'y'
+    var str = "1000 100cat 100dog 1000cat 1000dog";
+    var REGEXP = /100(?=cat|dog)/gi;
+    console.log(str.match(REGEXP)); // (2) ["100", "100"]
+
+
+    // 3. 后行断言 (?<=y)x 匹配'x'仅当'x'前面是'y'
+    var str = "1000 cat100 dog100 cat1000 dog1000";
+    var REGEXP = /(?<=cat|dog)1000/gi;
+    console.log(str.match(REGEXP)); // (2) ["1000", "1000"]
+  </script>
+</body>
+
+</html>

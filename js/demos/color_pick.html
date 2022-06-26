@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon"
+        href="data:image/png;base64,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"
+        type="image/x-icon">
+    <style>
+        html,
+        body,
+        div,
+        p,
+        input {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 13px "microsoft yahei";
+        }
+
+        input {
+            border: none;
+            outline: none;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-flow: row nowrap;
+            width: 100%;
+        }
+
+        .container div {
+            /* float: left; */
+            width: 200px;
+            height: 50px;
+            border: 1px solid #fff;
+            text-align: center;
+            line-height: 25px;
+        }
+
+        .container div input {
+            text-align: center;
+        }
+
+        #board {
+            height: 50px;
+            /* background: red; */
+            margin: 20px auto;
+            width: 200px;
+            line-height: 50px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+    <title>color_pick</title>
+</head>
+
+<body>
+    <div id="board"></div>
+
+    <div class="container">
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+        <div>
+            <input type="text">
+            <p></p>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        window.onload = function () {
+            var inputs = document.getElementsByTagName("input");
+            var board = document.getElementById('board');
+
+            // console.log(inputs.length);
+            // console.log(arr.length);
+
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].value = arr[i].color;
+                inputs[i].style.background = arr[i].color;
+                inputs[i].nextElementSibling.innerHTML = arr[i].name;
+                inputs[i].parentElement.style.background = arr[i].color;
+            }
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].parentElement.onclick = function () {
+                    this.children[0].select();
+                    document.execCommand("copy");
+                    board.innerText = this.children[1].innerHTML + " Copied.";
+                    board.style.background = this.children[0].value;
+                };
+            }
+
+
+
+
+        };
+
+        var arr = [{
+            name: "杏红",
+            color: "#ff8c31"
+        }, {
+            name: "橙黄",
+            color: "#ffa400"
+        }, {
+            name: "橘红",
+            color: "#ff7500"
+        }, {
+            name: "橘黄",
+            color: "#ff8936"
+        }, {
+            name: "棕黄",
+            color: "#ae7000"
+        }, {
+            name: "琥珀",
+            color: "#ca6924"
+        }, {
+            name: "朱砂",
+            color: "#ff461f"
+        }, {
+            name: "妃色",
+            color: "#ed5736"
+        }, {
+            name: "品红",
+            color: "#f00056"
+        }, {
+            name: "枣红",
+            color: "#c32136"
+        }, {
+            name: "殷红",
+            color: "#be002f"
+        }, {
+            name: "樱桃色",
+            color: "#c93756"
+        }, {
+            name: "嫩绿",
+            color: "#bddd22"
+        }, {
+            name: "葱绿",
+            color: "#9ed900"
+        }, {
+            name: "油绿",
+            color: "#00bc12"
+        }, {
+            name: "松花绿",
+            color: "#057748"
+        }, {
+            name: "草绿",
+            color: "#40de5a"
+        }, {
+            name: "绿沈",
+            color: "#0c8918"
+        }, {
+            name: "蔚蓝",
+            color: "#70f3ff"
+        }, {
+            name: "宝蓝",
+            color: "#4b5cc4"
+        }, {
+            name: "藏蓝",
+            color: "#3b2e7e"
+        }, {
+            name: "石青",
+            color: "#1685a9"
+        }, {
+            name: "花青",
+            color: "#003472"
+        }, {
+            name: "蓝色",
+            color: "#44cef6"
+        }, {
+            name: "翡翠",
+            color: "#3de1ad"
+        }, {
+            name: "玉色",
+            color: "#2edfa3"
+        }, {
+            name: "青翠",
+            color: "#00e079"
+        }, {
+            name: "碧色",
+            color: "#1bd1a5"
+        }, {
+            name: "铜绿",
+            color: "#549688"
+        }, {
+            name: "青色",
+            color: "#00e09e"
+        }, {
+            name: "紫色",
+            color: "#8d4bbb"
+        }, {
+            name: "紫棠",
+            color: "#56004f"
+        }, {
+            name: "丁香色",
+            color: "#cca4e3"
+        }, {
+            name: "藕色",
+            color: "#edd1d8"
+        }, {
+            name: "青莲",
+            color: "#801dae"
+        }, {
+            name: "雪青",
+            color: "#b0a4e3"
+        }, {
+            name: "茶白",
+            color: "#f3f9f1"
+        }, {
+            name: "月白",
+            color: "#d6ecf0"
+        }, {
+            name: "象牙白",
+            color: "#fffbf0"
+        }, {
+            name: "霜色",
+            color: "#e9f1f6"
+        }, {
+            name: "雪白",
+            color: "#f0fcff"
+        }, {
+            name: "铅白",
+            color: "#f0f0f4"
+        }, {
+            name: "棕色",
+            color: "#b25d25"
+        }, {
+            name: "棕红",
+            color: "#9b4400"
+        }, {
+            name: "驼色",
+            color: "#a88462"
+        }, {
+            name: "棕绿",
+            color: "#827100"
+        }, {
+            name: "褐色",
+            color: "#6e511e"
+        }, {
+            name: "秋色",
+            color: "#896c39"
+        }, {
+            name: "乌黑",
+            color: "#392f41"
+        }, {
+            name: "黎色",
+            color: "#75664d"
+        }, {
+            name: "栗色",
+            color: "#60281e"
+        }, {
+            name: "紫檀",
+            color: "#4c221b"
+        }, {
+            name: "黝黑",
+            color: "#665757"
+        }, {
+            name: "煤黑",
+            color: "#312520"
+        }];
+    </script>
+</body>
+
+</html>

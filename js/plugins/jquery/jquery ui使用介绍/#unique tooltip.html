@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./lib/jquery-ui-1.12.1/jquery-ui.css" type="text/css">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <script src="./lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+  <title>tooltip</title>
+</head>
+
+<body>
+  <div>
+    <label for="age">Your age:</label>
+    <input id="age" title="We ask for your age only for statistical purposes.">
+  </div>
+
+  <script>
+    // 1. 引入jquery ui样式（因为有用到resizable）
+    // 2. 引入jquery
+    // 3. 引入jquery ui （官网https://jqueryui.com/下载stable版本）
+    // 4. 指定元素或者document使用jquery ui的方法即可
+
+
+    $(function () {
+      $('#age').tooltip();
+    });
+
+
+    // 其他设置参考jquery ui中文手册https://www.jqueryui.org.cn/
+  </script>
+</body>
+
+</html>

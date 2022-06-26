@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3d导航栏360度翻转</title>
+  <style>
+    ol {
+      font-weight: bold;
+    }
+
+    .list-box {
+      list-style: none;
+      display: flex;
+      width: 800px;
+      height: 40px;
+      justify-content: space-evenly;
+      padding-left: 0px;
+      /* margin: 0 auto; */
+      perspective: 500px;
+    }
+
+    .list-box li {
+      position: relative;
+      width: 80px;
+      height: 40px;
+      line-height: 40px;
+      background: #eee;
+      transition: 400ms;
+      transform-style: preserve-3d;
+    }
+
+    .list-box li span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+
+    }
+
+    .list-box li:hover {
+      transform: rotateX(-180deg);
+    }
+
+    /* top */
+    .list-box li span:nth-child(1) {
+      background: #f44;
+      transform: rotateX(90deg) translateZ(20px);
+    }
+
+    /* back */
+    .list-box li span:nth-child(2) {
+      background: #4f4;
+      transform: translateZ(-20px) rotateX(180deg);
+    }
+
+    /* bottom */
+    .list-box li span:nth-child(3) {
+      background: #44f;
+      transform: rotateX(-90deg) translateZ(20px);
+    }
+
+    /* front */
+    .list-box li span:nth-child(4) {
+      background: #ff4;
+      transform: translateZ(20px);
+    }
+  </style>
+</head>
+
+<body>
+  <ol>
+    <li>旋转X上面进去为正 旋转Y右边进去为正 旋转Z逆时针为正</li>
+    <li>可以直接让4个面的父元素li在hover时旋转 transition和transform-style: preserve-3d;要加上</li>
+    <li>为了更好看出效果 在li元素的父元素加上perspective: 500px;</li>
+  </ol>
+
+  <ul class="list-box">
+    <li><span>top</span><span>back</span><span>bottom</span><span>front</span></li>
+    <li><span>top</span><span>back</span><span>bottom</span><span>front</span></li>
+    <li><span>top</span><span>back</span><span>bottom</span><span>front</span></li>
+    <li><span>top</span><span>back</span><span>bottom</span><span>front</span></li>
+    <li><span>top</span><span>back</span><span>bottom</span><span>front</span></li>
+  </ul>
+</body>
+
+</html>

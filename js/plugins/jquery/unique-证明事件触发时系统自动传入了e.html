@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>证明事件触发时系统自动传入了e</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: #f44;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+
+  <script>
+    $(function () {
+      $('.box').on('click', function () {
+        console.log(arguments.length);
+        console.log(arguments[0]);
+      });
+    });
+  </script>
+</body>
+
+</html>

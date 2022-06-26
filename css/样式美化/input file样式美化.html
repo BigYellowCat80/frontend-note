@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input file样式美化</title>
+    <style>
+        p {
+            margin-bottom: 0;
+            font: bold 16px "serif";
+        }
+
+        label {
+            display: block;
+            width: 142px;
+            height: 39px;
+        }
+
+        label input {
+            display: none;
+        }
+
+        label .bg {
+            cursor: pointer;
+            width: 142px;
+            height: 39px;
+            background: url(./img/upload.jpg) no-repeat -22px -120px;
+        }
+
+
+        .box {
+            position: relative;
+            width: 142px;
+            height: 39px;
+        }
+
+        .box div {
+            height: 100%;
+            width: 100%;
+            background: url(./img/upload.jpg) no-repeat -22px -120px;
+            cursor: pointer;
+        }
+
+        .box input {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            cursor: pointer;
+        }
+
+
+        a {
+            display: block;
+            width: 142px;
+            height: 39px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        a div {
+            width: 142px;
+            height: 39px;
+            background: url(./img/upload.jpg) no-repeat -22px -179px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>label</p>
+    <label>
+        <input type="file">
+        <div class="bg"></div>
+    </label>
+
+    <p>opacity</p>
+    <div class="box">
+        <input type="file">
+        <div></div>
+    </div>
+
+    <p>download file</p>
+    <a href="./assets/upload.rar">
+        <div></div>
+    </a>
+
+</body>
+
+</html>

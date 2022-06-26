@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>省市选择</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      padding-top: 20px;
+      padding-left: 20px;
+    }
+
+    .sel {
+      margin-top: 20px;
+      width: 100px;
+      text-align: center;
+      line-height: 28px;
+      cursor: pointer;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-right: 20px;
+    }
+
+    .sel p {
+      background: #44f;
+      opacity: .8;
+      filter: alpha(opacity=80);
+      color: #fff;
+    }
+
+    .sel ul {
+      list-style: none;
+      font-size: 14px;
+      display: none;
+    }
+
+    .sel:hover p {
+      opacity: 1;
+      filter: alpha(opacity=100);
+    }
+
+    .sel ul li {
+      background: #f44;
+      box-sizing: border-box;
+      border-bottom: 1px solid #fff;
+      line-height: 27px;
+    }
+
+    .sel ul li:hover {
+      background: #4f4;
+      color: #fff;
+    }
+
+    #box {
+      display: flex;
+    }
+  </style>
+</head>
+
+<body>
+  <select name="province" id="province">
+
+  </select>
+  <select name="city" id="city"></select>
+
+  <div id="box">
+    <div class="sel pro">
+      <p>选择省份</p>
+      <ul>
+      </ul>
+    </div>
+
+    <div class="sel cit">
+      <p>选择城市</p>
+      <ul>
+      </ul>
+    </div>
+  </div>
+  <script>
+    var data = [
+      {
+        province: '广东',
+        city: ['广州', '深圳', '珠海']
+      }, {
+        province: '北京',
+        city: ['西城 ', '东城', '通州']
+      }, {
+        province: '河北',
+        city: ['石家庄', '秦皇岛', '保定']
+      }, {
+        province: '天津',
+        city: ['青羊', '大港', '红桥']
+      }
+    ];
+
+    $(function () {
+      initProvince(); // 先初始化省的数据
+
+      // 省的change事件绑定
+      $('#province').on('change', function () {
+        var province = $(this).val();
+        initCity(province);
+      });
+
+      // triggerHandler
+      $('#province').triggerHandler('change');
+
+
+
+      function initProvince() {
+        data.forEach(element => {
+          $(`<option value="${element.province}">${element.province}</option>`).appendTo($('#province'));
+        });
+      }
+
+      function initCity(province) {
+        $('#city').html('');
+
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].province == province) {
+            var cityArr = data[i].city;
+            break;
+          }
+        }
+        // console.log(cityArr);
+        cityArr.forEach(element => {
+          $(`<option value="${element}">${element}</option>`).appendTo($('#city'));
+        });
+      }
+
+
+
+
+      // 漂亮样式版本
+      // 1. 先加载省的数据
+      initPro();
+
+      // 2. 点击选择城市时 ul列表显示
+      $('.sel p').on('click', function (e) {
+        $(this).next().slideDown(100);
+        e.stopPropagation();
+        if (!$(this).next().text().trim()) { alert('请先选择省份'); }
+      });
+
+      // 3. 空白地方点击 ul列表缩回去
+      $(document).on('click', function () {
+        $('.sel ul').slideUp(50);
+      });
+
+      // 4. 省份点击li标签时 标签显示为点击的内容
+      $('.pro ul li').on('click', function () {
+        var text = $(this).text();
+        // console.log(text);
+        $('.pro p').text(text);
+        $('.pro ul').slideUp(50);
+        initCit(text);
+      });
+
+      // 5. 城市点击li标签时 标签显示为点击的内容 // 这里要用事件委托
+      $('.cit ul').on('click', 'li', function (e) {
+        var target = e.target;
+        var text = $(target).text()
+        // console.log(text);
+        $('.cit p').text(text);
+        $('.cit ul').slideUp(50);
+      });
+
+
+
+
+
+      function initPro() {
+        data.forEach(element => {
+          $('.pro').children('ul').append(`<li>${element.province}</li>`);
+        });
+      }
+
+
+      function initCit(text) {
+        $('.cit ul').html('');
+
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].province == text) {
+            var cityArr = data[i].city;
+            break;
+          }
+        }
+        // console.log(cityArr);
+        cityArr.forEach(element => {
+          $('.cit').children('ul').append(`<li>${element}</li>`);
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

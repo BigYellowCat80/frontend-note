@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>长单词换行</title>
+  <style>
+    /* wrap优雅换行，break粗暴换行 */
+    div {
+      width: 100px;
+      background: #f44;
+      margin-bottom: 8px;
+    }
+
+    .wrap {
+      word-wrap: break-word;
+    }
+
+    .break {
+      word-break: break-all;
+    }
+  </style>
+</head>
+
+<body>
+  <strong>默认</strong>
+  <div>This is a loooooooooooooog day</div>
+
+  <strong>word-wrap: break-word;</strong>
+  <div class="wrap">This is a loooooooooooooog day</div>
+
+  <strong>word-break: break-all;</strong>
+  <div class="break">This is a loooooooooooooog day</div>
+</body>
+
+</html>

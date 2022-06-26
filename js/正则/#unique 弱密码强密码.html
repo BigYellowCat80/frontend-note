@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>弱密码强密码</title>
+</head>
+
+<body>
+  <input type="text" name="" id="txt">
+
+  <script>
+    var txt = document.getElementById('txt');
+
+    var num = /\d/;
+    var lowerCase = /[a-z]/;
+    var upperCase = /[A-Z]/;
+    txt.onkeyup = function () {
+      var level = 0;
+      if (this.value.length < 6) {
+        console.log("password is too weak.");
+      } else {
+        if (num.test(this.value)) { level++; }
+        if (lowerCase.test(this.value)) { level++; }
+        if (upperCase.test(this.value)) { level++; }
+        console.log(level);
+        switch (level) {
+          case 1:
+            console.log("weak");
+            break;
+          case 2:
+            console.log("medium");
+            break;
+          case 3:
+            console.log("strong");
+            break;
+          default:
+            console.log("password is too weak.");
+        }
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>

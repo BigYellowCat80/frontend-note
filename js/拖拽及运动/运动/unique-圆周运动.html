@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圆周运动</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    #circle {
+      width: 20px;
+      height: 20px;
+      background: #4f4;
+      border-radius: 50%;
+      position: absolute;
+      /* top: 200px; */
+      left: 100px;
+      box-shadow: 1px 1px 4px black;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="circle"></div>
+
+  <script>
+    window.onload = function () {
+      var circle = document.getElementById("circle");
+      var centerX = 100; // 圆心位置
+      var centerY = 100;
+      var r = 100;
+      var deg = 0;
+      var timer = setInterval(function () {
+        // 每秒绿色小球运动
+        deg++;
+        var rad = deg * Math.PI / 180; // 角度转成弧度
+        var circleX = r * Math.sin(rad);
+        var circleY = r * Math.cos(rad);
+        circle.style.left = centerX + circleX + "px";
+        circle.style.top = centerY - circleY + "px";
+
+
+        var track = document.createElement("div");
+        // 设置track的样式
+        track.style.width = "4px";
+        track.style.height = "4px";
+        track.style.borderRadius = '50%';
+        track.style.position = "absolute";
+        track.style.background = "orange";
+
+        track.style.left = circle.offsetLeft + 8 + "px";
+        track.style.top = circle.offsetTop + 8 + "px";
+        document.body.appendChild(track);
+        if (rad >= Math.PI * 2) {
+          clearInterval(timer);
+          console.log('Done');
+        }
+      }, 10);
+    };
+  </script>
+</body>
+
+</html>

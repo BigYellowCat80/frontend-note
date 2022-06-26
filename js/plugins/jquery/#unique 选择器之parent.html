@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>选择器之parent</title>
+  <style>
+    div {
+      width: 400px;
+      height: 400px;
+      background: #f44;
+    }
+
+    ul {
+      padding-left: 0;
+      width: 300px;
+      height: 300px;
+      background: #4f4;
+      position: relative;
+    }
+
+    li {
+      width: 200px;
+      height: 200px;
+      background: #44f;
+    }
+
+    span {
+      display: block;
+      width: 100px;
+      height: 100px;
+      background: #ff4;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div>div
+    <ul>ul
+      <li>li
+        <span>span</span>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    // [parent, closest, parents, parentsUntil, offsetParent]
+
+    // parent(filter) 直接父元素
+    // closest(filter) 最近一个符合筛选条件的父元素
+    // parents(filter) 所有父元素包括body html
+    // parentsUntil(filter)
+    // offsetParent()
+
+    $(function () {
+      console.log($('span').parent()); // [li]
+
+      console.log($('span').closest('ul')); // [ul]
+
+      console.log($('span').parents()); // [li, ul, div, body, html]
+
+      console.log($('span').parentsUntil('body')); // [li, ul, div]
+
+      console.log($('span').offsetParent()); // [ul]
+    });
+  </script>
+</body>
+
+</html>

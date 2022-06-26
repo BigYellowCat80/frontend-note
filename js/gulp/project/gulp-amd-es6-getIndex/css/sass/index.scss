@@ -1,0 +1,25 @@
+.box{
+  width: 384px;
+  height: 216px;
+  border:2px solid orange;
+  background: #4f4;
+  margin:4px 0 0 4px;
+  >img{width: 100%;}
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+  appearance: none;
+}
+
+ul{
+  margin-top: 10px;
+  >li{
+    width: 400px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin: 4px;
+    color: #fff;
+    background: #44f;}
+}

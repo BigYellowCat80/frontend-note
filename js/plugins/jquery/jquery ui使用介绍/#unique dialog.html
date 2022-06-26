@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./lib/jquery-ui-1.12.1/jquery-ui.css" type="text/css">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <script src="./lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+  <title>dialog</title>
+  <style>
+    .ui-dialog-titlebar {
+      background: #f44;
+    }
+
+    .ui-widget-overlay {
+      background: #666;
+      opacity: .5;
+      filter: alpha(opacity=50);
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">open dialog</button>
+  <div id="dialog"></div>
+
+
+  <script>
+    // 1. 引入jquery ui样式（因为有用到resizable）
+    // 2. 引入jquery
+    // 3. 引入jquery ui （官网https://jqueryui.com/下载stable版本）
+    // 4. 指定元素使用jquery ui的方法即可
+    // 5. 注意点 模态框的样式要设置不透明度 
+
+
+    $(function () {
+      $("#dialog").dialog({
+        autoOpen: false,
+        modal: true,
+        width: 400,
+        height: 200,
+        minHeight: 100,
+        minWidth: 200,
+        maxWidth: 600,
+        maxHeight: 300,
+      });
+
+      $("#btn").click(function () {
+        $("#dialog").dialog("open");
+      });
+    });
+
+
+    // 其他设置参考jquery ui中文手册https://www.jqueryui.org.cn/
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./inde.css" type="text/css">
+  <title>index</title>
+</head>
+
+<body>
+  <div class="wrap">
+    <ul class="list">
+
+    </ul>
+    <div class="btn-wrap">
+      <div class="active"></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <script src="./ajax.js"></script>
+  <script>
+    // 1. ajax请求获取图片地址
+
+    function load() {
+      return new Promise((resolve, reject) => {
+        ajax({
+          url: './data.json',
+          success(res) {
+            resolve(res);
+          }
+        })
+      })
+    };
+
+    window.onload = function () {
+
+      load().then(res => {
+        // 2. 获取图片地址后初始化
+        let str = '';
+        const arr = JSON.parse(res);
+        arr.forEach(element => {
+          str += `<li><img src="${element}"></li>`;
+        });
+        str += `<li><img src="${arr[0]}"></li>`;
+
+
+        const list = document.querySelector('.list');
+        const wrap = document.querySelector('.wrap');
+        list.innerHTML = str;
+        list.style.width = list.children[0].offsetWidth * list.children.length + 'px';
+        let currentIndex = 0;
+        const btns = Array.from(document.querySelectorAll('.btn-wrap>div'));
+        tab();
+
+        btns.forEach((element, index) => {
+          element.onclick = function () {
+            if (currentIndex != index) {
+              currentIndex = index;
+              // console.log(index);
+              tab();
+            }
+          }
+        })
+
+        let timer = setInterval(() => {
+          currentIndex++;
+          tab();
+        }, 3000);
+
+        wrap.onmouseenter = function () {
+          clearInterval(timer);
+        };
+        wrap.onmouseleave = function () {
+          timer = setInterval(() => {
+            currentIndex++;
+            tab();
+          }, 3000);
+        };
+
+        list.ontransitionend = function (e) {
+          // console.log('ontransitionend');
+
+          e = e || window.event;
+          if (e.propertyName == 'left' && currentIndex >= 4) {
+            currentIndex = 0;
+            list.style.transition = '0s';
+            list.style.left = '0px';
+          }
+        }
+
+        function tab() {
+          console.log('tab()');
+          console.log(new Date());
+          list.style.transition = '500ms';
+          btns.forEach(element => {
+            element.className = '';
+          });
+          if (currentIndex >= 4) {
+            btns[0].className = 'active';
+          } else {
+            btns[currentIndex].className = 'active';
+          }
+          list.style.left = -currentIndex * list.children[0].offsetWidth + 'px';
+        }
+      });
+
+
+
+    }
+
+
+
+  </script>
+</body>
+
+</html>

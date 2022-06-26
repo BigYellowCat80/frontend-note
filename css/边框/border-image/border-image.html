@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>border-image</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      padding-left: 30px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .btn-box {
+      margin-left: 30px;
+    }
+
+    .div-box {
+      width: 400px;
+      height: 200px;
+      border: 20px solid black;
+      margin: 10px;
+      border-image: url(./img/borderImage.png) 30;
+      /* 蓝色是最细了 最粗是49% */
+    }
+
+    .active {
+      background: #f44;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>语法 border-image: source slice/width/outset repeat</li>
+    <li>默认值 none 100% 1 0 stretch</li>
+    <li>slice让中间的蓝色最细是34% 最粗是49% 一般设置30就可以</li>
+    <li>width 一般不用设置 默认就跟边框宽度一致</li>
+    <li>outset是border往外扩展的距离 一般不用设置</li>
+    <li>repeat的默认值stretch 可选值repeat round space initial inherit 一般设置round最好看</li>
+  </ul>
+
+  <div class="btn-box">
+    <button class="active">stretch</button>
+    <button>repeat</button>
+    <button>round</button>
+    <button>space</button>
+  </div>
+
+  <div class="div-box"></div>
+
+  <script>
+    const btns = Array.from(document.querySelectorAll('.btn-box button'));
+    const value = ['stretch', 'repeat', 'round', 'space'];
+    btns.forEach((element, index) => {
+      element.onclick = function () {
+        btns.forEach((ele, indey) => { ele.className = ''; });
+        this.className = 'active';
+        // console.log(index);
+        // console.log(value[index]);
+        document.querySelector('.div-box').style.borderImageRepeat = value[index];
+      }
+    });
+  </script>
+</body>
+
+</html>

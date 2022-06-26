@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./lib/jquery-1.11.3.min.js"></script>
+  <title>clone</title>
+  <style>
+    .list {
+      width: 200px;
+      display: flex;
+      border: 2px solid orange;
+      flex-flow: row wrap;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .list li {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="list">
+    <li style="background: #f44;"></li>
+    <li style="background: #4f4;"></li>
+    <li style="background: #44f;"></li>
+    <li style="background: #ff4;"></li>
+  </ul>
+
+  <script>
+    // 原生js cloneNode([deep]) deep如果为假 只克隆当前元素 如果为真 会克隆元素及其后代 但是 事件不能克隆
+
+    // jquery clone([deep]) deep如果为假 克隆元素及其后代 不克隆事件 如果为真 本身和后代的事件也克隆
+
+    var list = Array.from(document.querySelectorAll('.list'));
+    var lis = Array.from(document.querySelectorAll('.list li'));
+
+    list.forEach((element, index) => {
+      $(element).on('click', function () {
+        $(this).animate({ width: 400 });
+      })
+    })
+    lis.forEach((element, index) => {
+      $(element).on('click', function () { console.log(index); })
+    });
+
+    // 1.cloneNode([deep])
+    // document.body.append(list.cloneNode()); // 只克隆当前元素
+    // document.body.append(list.cloneNode(true)); // 会克隆元素及其后代 但是 事件不能克隆
+
+    // 2. clone([deep])
+    // $(document.body).append($('.list').clone()); // 克隆元素及其后代 不克隆事件
+    $(document.body).append($(".list").clone(true)); // 如果为真 本身和后代的事件也克隆
+  </script>
+</body>
+
+</html>

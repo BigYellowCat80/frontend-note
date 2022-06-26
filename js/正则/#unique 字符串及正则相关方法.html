@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串及正则相关方法</title>
+  <style>
+    body {
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    img {
+      border: 2px solid orange;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./img/regexp 元字符 限定符 反义词.png" alt="">
+
+  <script>
+    // 1. String.prototype.match(REGEXP)
+    // 2. String.prototype.search(REGEXP)
+    // 3. REGEXP.test
+    // 4. REGEXP.exec
+
+    var kimi = "kimi is a pig, a big PIG!";
+    var REGEXP = /pig/gi;
+
+    // console.log(kimi.match(REGEXP)); // (2) ["pig", "PIG"]
+    // console.log(kimi.search(REGEXP)); // 10
+    // console.log(REGEXP.test(kimi)); // true
+
+    console.log(REGEXP.exec(kimi)); // ["pig"] index: 10
+    console.log(REGEXP.exec(kimi)); // ["pig"] index: 21
+    console.log(REGEXP.exec(kimi)); // null
+    console.log(REGEXP.exec(kimi)); // ["pig"] index: 10
+
+
+  </script>
+</body>
+
+</html>

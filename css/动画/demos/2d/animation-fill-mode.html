@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>animation-fill-mode</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      border-radius: 4px;
+      margin: 4px;
+      background: #000;
+      animation: move 5s ease 5s;
+      color: #fff;
+    }
+
+    @keyframes move {
+      0% {
+        background: #f44;
+      }
+
+      100% {
+        transform: translateX(400px);
+        background: #44f;
+      }
+    }
+
+    .backwards {
+      animation-fill-mode: backwards;
+    }
+
+    .forwards {
+      animation-fill-mode: forwards;
+    }
+
+    .both {
+      animation-fill-mode: both;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="none">none</div>
+  <div class="backwards">backwards</div>
+  <div class="forwards">forwards</div>
+  <div class="both">both</div>
+
+  <!-- none: 0%在动画延迟后开始 -->
+  <!-- backwards: 0%在动画延迟前开始 -->
+  <!-- forwards: 0%在动画延迟后开始 并且停留在100%的位置 -->
+  <!-- both: 相当于backwards和forwards都有 -->
+</body>
+
+</html>

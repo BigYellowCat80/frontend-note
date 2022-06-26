@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>清除浮动的4大类方法</title>
+  <style>
+    .parent {
+      width: 200px;
+      background: #f44;
+      border: 2px solid black;
+    }
+
+    .parent::after {
+      content: "";
+      display: block;
+      clear: both;
+      height: 0;
+      line-height: 0;
+      visibility: hidden;
+    }
+
+    .child {
+      width: 100px;
+      height: 100px;
+      background: #4f4;
+      float: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="parent">
+    <div class="child"></div>
+  </div>
+
+  <!-- 1. 伪元素::after -->
+  <!-- 2. 父元素触发BFC [overflow, float, position, display] -->
+  <!-- 3. 后面加个空标签clear: both -->
+  <!-- 4. 父元素设置高度 -->
+</body>
+
+</html>
